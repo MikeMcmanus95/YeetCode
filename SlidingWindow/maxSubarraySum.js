@@ -7,6 +7,8 @@ function maxSubarraySum(array, n) {
   let start = 0;
   let end = 1;
   let tempSum = array[start];
+
+  if (!array.length) return null;
   for (end; end < n; end++) {
     tempSum += array[end];
   }
@@ -20,3 +22,4 @@ function maxSubarraySum(array, n) {
 }
 
 console.log(maxSubarraySum([1, 5, 7, 3, 9, 11, 8], 3));
+console.log(maxSubarraySum([0], 3));
