@@ -1,3 +1,5 @@
+// This algo needs no introduction.
+
 function knuthMorrisPrattAlgorithm(string, substring) {
   let table = generatePattern(substring);
   let result = matchPattern(string, substring, table);
