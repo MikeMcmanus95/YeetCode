@@ -6,15 +6,19 @@ function merge(array1, array2) {
     if (array1[i] < array2[j]) {
       mergedArray.push(array1[i]);
       i++;
-    } else if (array1[i] > array2[j]) {
+    } else {
       mergedArray.push(array2[j]);
       j++;
     }
-    if (array1[i] === undefined) {
-      mergedArray = mergedArray.concat(array2.slice(j, array2.length));
-    } else if (array2[j] === undefined) {
-      mergedArray = mergedArray.concat(array1.slice(i, array1.length));
-    }
+  }
+
+  while (i < array1.length) {
+    mergedArray.push(array1[i]);
+    i++;
+  }
+  while (j < array2.length) {
+    mergedArray.push(array2[j]);
+    j++;
   }
   return mergedArray;
 }
