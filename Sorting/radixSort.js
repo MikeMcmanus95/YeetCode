@@ -31,6 +31,8 @@ function radixSort(array) {
       let digit = getDigit(array[j], i);
       bucket[digit].push(array[j]);
     }
+    // reassigning to empty array, using concat to append every element in buckets,
+    // using spread to flatten
     array = [].concat(...bucket);
   }
   return array;
@@ -38,4 +40,4 @@ function radixSort(array) {
 
 let bigArray = [22, 43, 642, 12, 124, 98, 4514, 4, 2218, 23, 445, 827, 7];
 let smallArray = [42, 472, 231, 5, 23, 235];
-console.log(radixSort(smallArray));
+console.log(radixSort(bigArray));
