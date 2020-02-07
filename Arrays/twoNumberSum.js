@@ -2,6 +2,11 @@
 
 Sample input: [3, 5, -4, 8, 11, 1, -1, 6], 10
 Sample output: [-1, 11]
+
+Implementation: loop over the array twice using multiple pointers. Comparing each element to every other
+element in the array
+
+Time: O(n^2) Space: O(1)
 */
 
 function twoNumberSum(array, targetSum) {
