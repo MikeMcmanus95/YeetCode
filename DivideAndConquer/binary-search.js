@@ -1,3 +1,9 @@
+/* Implemenetation: use a min/max pointer, that rearranges itself based on the middle value of the array
+  if your value is greater than middle, increase left to the index of middle. Thus, searching only
+  the right side of the array. Same for left. Only works if array is sorted.
+
+  Time: O(n) Space: O(1)
+*/
 // [1,2,3,4,5,8,9,11,14,18] // 11
 
 function binarySearch(arr, target) {
