@@ -6,6 +6,10 @@
  areThereDuplicates(a,b,c) // false
  areThereDuplicates(a,b,c,a) // true
  areThereDuplicates(a,b,c,d,e,f,b,g,h,i,j,k) // true
+
+ Implementation: Use a frequency counter to check if an arguement occurs more than once.
+
+ Time: O(n) Space: O(n)
  */
 
 function areThereDuplicates() {

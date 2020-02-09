@@ -4,6 +4,9 @@ Sample input:
   sameFrequency(281, 182) // true
   sameFrequency(14, 34) // false
 
+Implementation: Use a frequency counter to check if an arguement occurs more than once.
+
+Time: O(n) Space: O(n)
 */
 
 function sameFrequency(num1, num2) {

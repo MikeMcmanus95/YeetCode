@@ -1,6 +1,12 @@
 // Do not edit the class below except for the insertKeyValuePair,
 // getValueFromKey, and getMostRecentKey methods. Feel free
 // to add new properties and methods to the class.
+
+/* Implementation: Use a doubly linked list, with an empty head and tail property, as
+  well as an object for the cache. Each key in the cache will point to a node on the linked list
+  that contains the value. When a key in interacted with or added, it becomes the head of the list.
+  When the maximum size is too large, we also remove the tail (oldest) element when we add new ones.
+*/
 class LRUCache {
   constructor(maxSize) {
     this.maxSize = maxSize || 1;
