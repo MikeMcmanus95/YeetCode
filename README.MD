@@ -12,3 +12,4 @@ A collection of algorithm challenges taken from Colt Steele's Udemy course, Algo
 
 - [x] Flatten a Multilevel Doubly Linked List (M)
 - [x] Best Time To Buy And Sell Stock (E)
+- [x] First Unique Character in a String (E)
