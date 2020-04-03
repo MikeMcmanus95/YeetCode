@@ -11,3 +11,4 @@ A collection of algorithm challenges taken from Colt Steele's Udemy course, Algo
 [Link](https://docs.google.com/spreadsheets/d/1U4Ighqvei8gMR90VS9iNTlQmtGOzqvGc3rm-LaHbAco/htmlview#gid=0)
 
 - [x] Flatten a Multilevel Doubly Linked List (M)
+- [x] Best Time To Buy And Sell Stock (E)
