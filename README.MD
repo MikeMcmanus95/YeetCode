@@ -15,3 +15,5 @@ A collection of algorithm challenges taken from Colt Steele's Udemy course, Algo
 - [x] First Unique Character in a String (E)
 - [x] Reverse a Linked List I (E)
 - [x] Invalid Transactions (M)
+- [x] Two City Scheduling (E)
+- [x] Decode String (M)
