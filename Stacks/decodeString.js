@@ -1,4 +1,6 @@
-var decodeString = function (s) {
+// Leetcode URL: https://leetcode.com/problems/decode-string
+
+const decodeString = function (s) {
   if (!s) return '';
 
   const stack = [];
