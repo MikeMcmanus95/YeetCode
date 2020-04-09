@@ -17,3 +17,4 @@ A collection of algorithm challenges taken from all corners of the internet, inc
 - [x] Invalid Transactions (M)
 - [x] Two City Scheduling (E)
 - [x] Decode String (M)
+- [x] All Paths From Source To Target (M)
