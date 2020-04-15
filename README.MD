@@ -20,3 +20,6 @@ A collection of algorithm challenges taken from all corners of the internet, inc
 - [x] All Paths From Source To Target (M)
 - [x] Longest Palindromic Substring (M)
 - [x] Number of Islands (M)
+- [x] LRU Cache (M)
+- [x] Remove All Adjacent Duplicates in String II (M)
+- [x] Insert Delete GetRandom O(1) (M)
