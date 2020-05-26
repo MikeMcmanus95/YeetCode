@@ -9,6 +9,7 @@ element in the array
 Time: O(n^2) Space: O(1)
 */
 
+// SOLUTION 1:
 function twoNumberSum(array, targetSum) {
   for (let i = 0; i < array.length - 1; i++) {
     for (let j = i + 1; j < array.length; j++) {
@@ -18,4 +19,20 @@ function twoNumberSum(array, targetSum) {
     }
   }
   return [];
+}
+
+
+// SOLUTION 2:
+function twoNumberSum(array, targetSum) {
+  let nums = {};
+  let pairs = [];
+  for (let i = 0; i < array.length; i++) {
+    if ((targetSum - array[i]) in nums) {
+      pairs.push(targetSum - array[i], array[i]);
+    }
+    else {
+      nums[array[i]] = true;
+    }
+  }
+  return pairs;
 }
