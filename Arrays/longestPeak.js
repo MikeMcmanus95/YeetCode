@@ -66,3 +66,29 @@ function longestPeak(array) {
   }
   return maxPeakLength;
 }
+
+
+//SOLUTION 3 (AlgoExpert):
+function longestPeak(array) {
+  let longestPeakLength = 0, currentPeak = 0, i = 1, leftIdx = 0, rightIdx = 0;
+  let isPeak = false;
+  while (i < array.length - 1) {
+    isPeak = array[i] > array[i + 1] && array[i] > array[i - 1];
+    if (!isPeak) {
+      i += 1;
+      continue;
+    }
+    leftIdx = i - 2;
+    while (leftIdx >= 0 && array[leftIdx] < array[leftIdx + 1]) {
+      leftIdx--;
+    }
+    rightIdx = i + 2;
+    while (rightIdx < array.length && array[rightIdx] < array[rightIdx - 1]) {
+      rightIdx++;
+    }
+    currentPeak = rightIdx - leftIdx - 1;
+    if (currentPeak > longestPeakLength) longestPeakLength = currentPeak;
+    i = rightIdx;
+  }
+  return longestPeakLength;
+}
