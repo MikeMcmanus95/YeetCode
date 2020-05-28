@@ -34,3 +34,18 @@ function validateBst(tree) {
   // If we finish, tree is valid
   return true;
 }
+
+// SOLUTION 2 (Recursive Depth First):
+// Time: O(n) | Space: O(d)
+// This handles all edge cases really nicely and is very short.
+
+function validateBst(tree) {
+  return validateBstHelper(tree, -Infinity, Infinity);
+}
+
+const validateBstHelper = (tree, minValue, maxValue) => {
+  if (!tree) return true;
+  if (tree.value < minValue || tree.value >= maxValue) return false;
+  let leftIsValid = validateBstHelper(tree.left, minValue, tree.value);
+  return leftIsValid && validateBstHelper(tree.right, tree.value, maxValue);
+}
