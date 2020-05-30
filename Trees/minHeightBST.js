@@ -54,6 +54,20 @@ function constructMinHeightBst(array, bst, startIdx, endIdx) {
   return bst;
 }
 
+// Time O(n) | Space O(n)
+function minHeightBst(array) {
+  return constructMinHeightBst(array, 0, array.length - 1);
+}
+
+function constructMinHeightBst(array, startIdx, endIdx) {
+  if (endIdx < startIdx) return;
+  let midIdx = Math.floor((startIdx + endIdx) / 2);
+  bst = new BST(array[midIdx]);
+  bst.left = constructMinHeightBst(array, startIdx, midIdx - 1);
+  bst.right = constructMinHiehgtBst(array, midIdx + 1, endIdx);
+  return bst;
+}
+
 class BST {
   constructor(value) {
     this.value = value;
