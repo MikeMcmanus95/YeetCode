@@ -6,9 +6,7 @@ A collection of algorithm challenges taken from all corners of the internet, inc
 
 `(E) === Easy, (M) === Medium, (H) === Hard`
 
-### Bloomberg Questions
-
-[Link](https://docs.google.com/spreadsheets/d/1U4Ighqvei8gMR90VS9iNTlQmtGOzqvGc3rm-LaHbAco/htmlview#gid=0)
+### Leetcode Questions
 
 - [x] Flatten a Multilevel Doubly Linked List (M)
 - [x] Best Time To Buy And Sell Stock (E)
