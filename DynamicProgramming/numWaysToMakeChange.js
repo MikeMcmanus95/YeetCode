@@ -14,3 +14,18 @@ function numberOfWaysToMakeChange(n, denoms) {
   }
   return ways[n];
 }
+
+// SOLUTION 2: (Better variable names)
+// Time O(nd) | Space O(n)
+function numberOfWaysToMakeChange(n, denoms) {
+  const ways = Array(n + 1).fill(0);
+  ways[0] = 1;
+  for (let denom of denoms) {
+    for (let amount = 1; amount < n + 1; amount++) {
+      if (denom <= amount) {
+        ways[amount] += ways[amount - denom];
+      }
+    }
+  }
+  return ways[n];
+}
