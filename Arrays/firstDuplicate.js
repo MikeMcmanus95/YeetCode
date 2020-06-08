@@ -24,7 +24,7 @@ console.log(firstDuplicate([2, 1, 3, 4, 5, 3, 2])); // 3
 
 // Solution 2: Clever
 // Time O(n) | Space O(1)
-const firstDuplcateClever = (array) => {
+const firstDuplicateClever = (array) => {
   for (let i = 0; i < array.length; i++) {
     let number = Math.abs(array[i]);
     let sign = Math.sign(array[number - 1]);
@@ -33,3 +33,5 @@ const firstDuplcateClever = (array) => {
   }
   return -1;
 }
+
+console.log(firstDuplicateClever([2, 1, 3, 4, 5, 3, 2])); // 3
