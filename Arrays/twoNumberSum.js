@@ -10,20 +10,21 @@ Time: O(n^2) Space: O(1)
 */
 
 // SOLUTION 1:
-function twoNumberSum(array, targetSum) {
-  for (let i = 0; i < array.length - 1; i++) {
-    for (let j = i + 1; j < array.length; j++) {
-      if (array[i] + array[j] === targetSum) {
-        return [array[i], array[j]];
-      }
-    }
-  }
-  return [];
-}
+// function twoNumberSum(array, targetSum) {
+//   for (let i = 0; i < array.length - 1; i++) {
+//     for (let j = i + 1; j < array.length; j++) {
+//       if (array[i] + array[j] === targetSum) {
+//         return [array[i], array[j]];
+//       }
+//     }
+//   }
+//   return [];
+// }
 
 
 // SOLUTION 2:
 function twoNumberSum(array, targetSum) {
+  debugger;
   let nums = {};
   let pairs = [];
   for (let i = 0; i < array.length; i++) {
@@ -36,3 +37,6 @@ function twoNumberSum(array, targetSum) {
   }
   return pairs;
 }
+
+
+console.log(twoNumberSum([3, 5, -4, 8, 11, 1, -1, 6], 10));

@@ -16,6 +16,7 @@ function powerset(array) {
 console.log(powerset([1, 2, 3])) // [[], [1], [2], [1,2], [3], [1,3], [2,3], [1,2,3]]
 
 // SOLUTION 2:
+// Time O(2^n * n) | Space O(2^n * n)
 function powerset(array, idx = null) {
   // [1,2,3,4]
   // Set idx to last element (3)
