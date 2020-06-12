@@ -26,3 +26,16 @@ function searchInSortedMatrix(matrix, target) {
   }
   return [-1, -1];
 }
+
+// SOLUTION 2:
+// Time O(n + m) | Space O(1)
+function searchInSortedMatrix(matrix, target) {
+  let row = 0, col = matrix[0].length - 1;
+  while (row < matrix.length && col >= 0) {
+    if (matrix[row][col] > target) col--;
+    else if (matrix[row][col] < target) row++;
+    else return [row, col];
+  }
+  return [-1, -1];
+}
+
