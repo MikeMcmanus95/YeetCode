@@ -63,7 +63,7 @@ Y   I   R
 
 */
 
-function convert(string, numRows) {
+function stringZigZag(string, numRows) {
   let resultStr = '';
   let stringIdx = 0, rowIdx = 0, colIdx = 0;
   let direction = false; // false == down, true = up/right
