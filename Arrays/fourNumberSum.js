@@ -1,5 +1,5 @@
 // AlgoExpert URL: https://www.algoexpert.io/questions/Four%20Number%20Sum
-// O(n^2) Time | O(n) space
+// O(n^2) Time Avg, O(n^3) Time Worst Case/Edge Case | O(n) space
 function fourNumberSum(array, targetSum) {
   let pairs = {};
   let quadruplets = [];
