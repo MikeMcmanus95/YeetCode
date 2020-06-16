@@ -42,7 +42,6 @@ function nonRepeatSubstring(str) {
 
     if (rightChar in charIndexMap) {
       windowStart = Math.max(windowStart, charIndexMap[rightChar] + 1);
-
     }
 
     charIndexMap[rightChar] = windowEnd;
