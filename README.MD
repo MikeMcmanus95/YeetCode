@@ -1,6 +1,6 @@
 # YEETCode
 
-A collection of algorithm challenges taken from all corners of the internet, including Colt Steele's Udemy course, AlgoExpert.io, and LeetCode.com
+A collection of algorithm challenges taken from all corners of the internet, including Colt Steele's Udemy course, AlgoExpert.io, Pramp, Grokking the Coding Interview, and LeetCode.com
 
 ## The Problems
 
