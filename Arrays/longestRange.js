@@ -31,6 +31,3 @@ function largestRange(array) {
   }
   return bestRange;
 }
-
-// Do not edit the line below.
-exports.largestRange = largestRange;
