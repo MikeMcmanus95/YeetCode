@@ -2,7 +2,7 @@
 
 // O(n) Time | O(n) Space
 function largestRange(array) {
-  const bestRange = [];
+  let bestRange = [];
   let longestLength = 0;
   const nums = {};
   for (let num of array) {
