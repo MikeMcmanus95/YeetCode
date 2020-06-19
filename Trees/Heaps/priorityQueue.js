@@ -76,12 +76,14 @@ class PriorityQueue {
   }
 }
 
-let pq = new PriorityQueue();
-pq.enqueue('common cold', 5);
-pq.enqueue('gunshot wound', 1);
-pq.enqueue('high fever', 4);
-pq.enqueue('broken arm', 2);
-pq.enqueue('glass in foot', 3);
-pq.dequeue();
+// let pq = new PriorityQueue();
+// pq.enqueue('common cold', 5);
+// pq.enqueue('gunshot wound', 1);
+// pq.enqueue('high fever', 4);
+// pq.enqueue('broken arm', 2);
+// pq.enqueue('glass in foot', 3);
+// pq.dequeue();
 
-console.log(pq);
+// console.log(pq);
+
+module.exports = PriorityQueue;
