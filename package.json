@@ -1,0 +1,23 @@
+{
+  "name": "YEETcode",
+  "version": "1.0.0",
+  "description": "A collection of algorithm challenges taken from all corners of the internet, including Colt Steele's Udemy course, AlgoExpert.io, Pramp, Grokking the Coding Interview, and LeetCode.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikeMcmanus95/YeetCode.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MikeMcmanus95/YeetCode/issues"
+  },
+  "homepage": "https://github.com/MikeMcmanus95/YeetCode#readme",
+  "dependencies": {
+    "collections": "^5.1.11"
+  }
+}
