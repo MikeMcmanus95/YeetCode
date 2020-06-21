@@ -6,7 +6,7 @@ class TreeNode {
   }
 }
 
-// Time Complexity O(n) | Space O(d)
+// Time Complexity O(n) | Space O(n)
 const find_sum_of_path_numbers = function (root) {
   return findPathSum(root, 0);
 };
