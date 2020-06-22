@@ -67,3 +67,5 @@ class MinHeap {
     [heap[i], heap[j]] = [heap[j], heap[i]];
   }
 }
+
+module.exports = MinHeap;

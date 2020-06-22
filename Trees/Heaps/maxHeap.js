@@ -5,7 +5,7 @@ class MaxBinaryHeap {
 
   insert(value) {
     this.values.push(value);
-    this.bubbleUpRecursive(value, this.values.length - 1);
+    this.bubbleUp(value, this.values.length - 1);
   }
 
   extractMax() {
@@ -13,6 +13,10 @@ class MaxBinaryHeap {
     let oldRoot = this.values.pop();
     this.sinkDown();
     return oldRoot;
+  }
+
+  peek() {
+    return this.values[0];
   }
 
   bubbleUpRecursive(value, index) {
@@ -67,15 +71,17 @@ class MaxBinaryHeap {
   }
 }
 
-const maxHeap = new MaxBinaryHeap();
-maxHeap.insert(41);
-maxHeap.insert(39);
-maxHeap.insert(33);
-maxHeap.insert(18);
-maxHeap.insert(27);
-maxHeap.insert(12);
-maxHeap.insert(55);
-maxHeap.insert(100);
-maxHeap.extractMax();
+// const maxHeap = new MaxBinaryHeap();
+// maxHeap.insert(41);
+// maxHeap.insert(39);
+// maxHeap.insert(33);
+// maxHeap.insert(18);
+// maxHeap.insert(27);
+// maxHeap.insert(12);
+// maxHeap.insert(55);
+// maxHeap.insert(100);
+// maxHeap.extractMax();
 
-console.log(maxHeap);
+// console.log(maxHeap);
+
+module.exports = MaxBinaryHeap;
