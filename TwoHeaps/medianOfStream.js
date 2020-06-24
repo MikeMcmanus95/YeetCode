@@ -2,12 +2,14 @@
 const MinHeap = require('../Trees/Heaps/minHeap');
 const MaxBinaryHeap = require('../Trees/Heaps/maxHeap');
 
+// O(n) Space
 class MedianOfAStream {
   constructor() {
     this.maxHeap = new MaxBinaryHeap() // Containing the smaller half of numbers
     this.minHeap = new MinHeap([]); // Containing the larger half of numbers
   }
 
+  // O(log (n)) Time - Heap insertion is logarithmic
   insert_num(num) {
     // Insert a number if the num is less than the top ele in maxHeap, or maxHeap top is null
     if (!this.maxHeap.values.length || this.maxHeap.peek() >= num) {
@@ -24,6 +26,7 @@ class MedianOfAStream {
     }
   }
 
+  // O(1) Time
   find_median(self) {
     let totalLength = this.minHeap.heap.length + this.maxHeap.values.length;
     if (totalLength % 2 === 0) {
