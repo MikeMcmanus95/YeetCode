@@ -45,3 +45,29 @@ function permutationsHelper(idx, array, permutations) {
 function swap(i, j, array) {
   [array[i], array[j]] = [array[j], array[i]];
 }
+
+// SOLUTION 3:
+// Time O(n * n!) | Space O(n * n!)
+const find_permutations = function (nums) {
+  const result = [];
+  const permutations = [];
+  permutations.push([]);
+
+  for (let i = 0; i < nums.length; i++) {
+    const currNum = nums[i];
+    const n = permutations.length;
+    for (let j = 0; j < n; j++) {
+      const currPerm = permutations.shift();
+      for (let k = 0; k < currPerm.length + 1; k++) {
+        const clonePerm = currPerm.slice();
+        clonePerm.splice(k, 0, currNum);
+        if (clonePerm.length === nums.length) result.push(clonePerm);
+        else permutations.push(clonePerm);
+      }
+    }
+  }
+  return result;
+};
+
+
+console.log(`Here are all the permutations: ${find_permutations([1, 3, 5])}`)

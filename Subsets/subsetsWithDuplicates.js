@@ -1,3 +1,4 @@
+// Time O(2^n) | Space O(2^n)
 const find_subsets = function (nums) { // [1, 3, 3]
   const subsets = [[]];
   nums.sort((a, b) => a - b);
