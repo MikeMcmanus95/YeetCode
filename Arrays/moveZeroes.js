@@ -26,6 +26,40 @@ const moveZeroes = function (nums) {
   }
 };
 
+// Approach 2: LNZE
+/*
+
+Input: [0,1,0,3,12]
+
+Output: [1,3,12,0,0]
+
+Approach:
+ -Loop over array
+ -Keep track of lastNonZeroElementIdx
+ -When reaching a number that is a non zero, swap it with LNZE + 1, increment LNZE
+ -Continue until loop terminates
+
+Time & Space:
+    O(n) Time | O(1) Space
+
+*/
+
+const moveZeroesLNZE = function (nums) {
+  // Keep track of lastNonZeroElementIdx
+  let lastNonZeroElementIdx = 0;
+  // Loop over array
+  for (let i = 0; i < nums.length; i++) {
+    // When reaching a number that is a non zero, swap it with LNZE
+    if (nums[i] !== 0) {
+      swap(i, lastNonZeroElementIdx, nums);
+      // increment LNZE
+      lastNonZeroElementIdx++;
+    }
+  }
+  // Continue until loop terminates
+  return nums;
+};
+
 const swap = (array, i, j) => {
   [array[i], array[j]] = [array[j], array[i]];
 };
