@@ -16,7 +16,7 @@ function removeDuplicates(arr, opt_rv, opt_hashFn) {
   while (cursorRead < arr.length) {
     let current = arr[cursorRead++];
     let key = hashFn(current);
-    if (!Object.prototype.hasOwnProperty.call(seen, key)) {
+    if (!seen.hasOwnProperty(key)) {
       seen[key] = true;
       returnArray[cursorInsert++] = current;
     }
