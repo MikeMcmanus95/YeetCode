@@ -29,3 +29,25 @@ const productExceptSelf = function(nums) {
 
   return resultArray;
 };
+
+// SOLUTION 2: Constant Space
+// Time: O(n) | Space: O(1)
+const productExceptSelfEfficient = function(nums) {
+  const n = nums.length;
+  const resultArray = new Array(n);
+  resultArray[0] = 1;
+
+  // Get products from the left
+  for (let i = 1; i < n; i++) {
+      resultArray[i] = nums[i - 1] * resultArray[i - 1];
+  }
+
+  let product = 1
+  // Get products from the right
+  for (let i = n - 2; i >= 0; i--) {
+      product *= nums[i + 1];
+      resultArray[i] = product * resultArray[i]
+  }
+
+  return resultArray;
+};
