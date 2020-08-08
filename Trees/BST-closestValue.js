@@ -23,3 +23,23 @@ function findClosestValueInBst(tree, target) {
   traverse(current);
   return closest;
 }
+
+// Closest Value in Binary Tree
+// Iterative approach using queue
+// Time: O(n) | Space: O(n)
+const closestValue = function(root, target) {
+  let queue = [root];
+  let minDifference = Infinity;
+  let nodeToReturn = null;
+  while (queue.length) {
+      let node = queue.shift();
+      let difference = Math.abs(node.val - target);
+      if (minDifference > difference) {
+          minDifference = difference;
+          nodeToReturn = node.val;
+      }
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+  }
+  return nodeToReturn;
+};
