@@ -78,3 +78,25 @@ function calcMax(array) {
 
   return [leftMax, rightMax];
 }
+
+// Solution 3: Optimal Solution
+// Time: O(n) | Space: O(1)
+function trapRainWater(height) {
+  const n = height.length;
+  if (n < 3) return 0;
+  let totalWater = 0, i = 0, j = n;
+  let leftMax = height[0], rightMax = height[n - 1];
+  while (i < j) {
+    leftMax = Math.max(height[i], leftMax[i]);
+    rightMax = Math.max(height[j], rightMax[j]);
+
+    if (leftMax <= rightMax) {
+      totalWater += (leftMax - height[i]);
+      i++;
+    } else {
+      totalWater += (rightMax - height[j]);
+      j--;
+    }
+  }
+  return totalWater;
+}
