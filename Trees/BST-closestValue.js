@@ -25,21 +25,15 @@ function findClosestValueInBst(tree, target) {
 }
 
 // Closest Value in Binary Tree
-// Iterative approach using queue
-// Time: O(n) | Space: O(n)
+// Iterative approach using binary search
+// Time: O(H) | Space: O(1)
 const closestValue = function(root, target) {
-  let queue = [root];
-  let minDifference = Infinity;
-  let nodeToReturn = null;
-  while (queue.length) {
-      let node = queue.shift();
-      let difference = Math.abs(node.val - target);
-      if (minDifference > difference) {
-          minDifference = difference;
-          nodeToReturn = node.val;
-      }
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
+  let val = root.val;
+  let closest = root.val;
+  while (root !== null) {
+      val = root.val;
+      closest = Math.abs(val - target) < Math.abs(closest - target) ? val : closest;
+      root = target < root.val ? root.left : root.right;
   }
-  return nodeToReturn;
+  return closest;
 };
