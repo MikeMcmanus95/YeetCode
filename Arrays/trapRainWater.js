@@ -29,7 +29,7 @@ const trap = function(height) {
 
 // Solution 2: Brute Force - Accepted by Leetcode
 // Time: O(n ^ 2) | Space: O(1)
-const trap = function(height) {
+const trapRain = function(height) {
   let totalWater = 0;
   for (let i = 1; i < height.length; i++) {
       let leftMax = getMax(height, 0, i + 1);
@@ -46,4 +46,35 @@ const getMax = function(array, startIdx, endIdx) {
       if (array[startIdx] > maxValue) maxValue = array[startIdx];
   }
   return maxValue;
+}
+
+
+// Solution 3: Precompute left and right max
+// Time: O(n) | Space: O(n)
+function trapRainPrecomp(height) {
+  const [leftMax, rightMax] = calcMax(height);
+  let totalWater = 0;
+  for (let i = 0; i < height.length; i++) {
+    let waterAndBuilding = Math.min(leftMax[i], rightMax[i]);
+    totalWater += waterAndBuilding - height[i];
+  }
+  return totalWater;
+}
+
+function calcMax(array) {
+  const n = array.length;
+  const leftMax = new Array(n);
+  const rightMax = new Array(n);
+  leftMax[0] = array[0];
+  rightMax[n - 1] = array[n - 1];
+
+  for (let i = 1; i < n; i++) {
+    leftMax[i] = Math.max(leftMax[i - 1], array[i]);
+  }
+
+  for (let i = n - 2; i >= 0; i--) {
+    rightMax[i] = Math.max(rightMax[i + 1], array[i])
+  }
+
+  return [leftMax, rightMax];
 }
