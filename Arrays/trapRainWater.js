@@ -1,4 +1,4 @@
-// Brute Force
+// Intial Brute Force - Exceeds Leetcode time
 // Time: O(n ^ 2) | Space: O(1)
 const trap = function(height) {
   let totalWater = 0;
@@ -26,3 +26,24 @@ const trap = function(height) {
   }
   return totalWater;
 };
+
+// Solution 2: Brute Force - Accepted by Leetcode
+// Time: O(n ^ 2) | Space: O(1)
+const trap = function(height) {
+  let totalWater = 0;
+  for (let i = 1; i < height.length; i++) {
+      let leftMax = getMax(height, 0, i + 1);
+      let rightMax = getMax(height, i, height.length);
+      let waterAndBuilding = Math.min(leftMax, rightMax);
+      totalWater += waterAndBuilding - height[i];
+  }
+  return totalWater
+};
+
+const getMax = function(array, startIdx, endIdx) {
+  let maxValue = -Infinity;
+  for (startIdx; startIdx < endIdx; startIdx++) {
+      if (array[startIdx] > maxValue) maxValue = array[startIdx];
+  }
+  return maxValue;
+}
