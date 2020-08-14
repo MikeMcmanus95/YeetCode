@@ -41,3 +41,31 @@ function lcs(str1, str2) {
 }
 
 console.log(lcs('aab', 'azb'));
+
+
+// SOLUTION 3: AlgoExpert
+// Time: O(nm * min(n, m)) | Space: O(nm * min(n, m))
+function longestCommonSubsequence(str1, str2) {
+  const grid = Array(str1.length + 1).fill().map(() => new Array(str2.length + 1));
+  for (let col = 0; col < grid[0].length; col++) {
+    grid[0][col] = "";
+  }
+  for (let row = 0; row < grid.length; row++) {
+    grid[row][0] = "";
+  }
+
+	for (let row = 1; row < grid.length; row++) {
+    for (let col = 1; col < grid[0].length; col++) {
+      if (str1[row - 1] === str2[col - 1]) {
+        grid[row][col] = grid[row - 1][col - 1] + str1[row - 1];
+      } else if (str1[row - 1] !== str2[col - 1]) {
+				let subStr1 = grid[row - 1][col];
+				let subStr2 = grid[row][col - 1];
+        grid[row][col] = subStr1.length > subStr2.length ? subStr1 : subStr2
+      }
+    }
+  }
+}
+
+// Do not edit the line below.
+exports.longestCommonSubsequence = longestCommonSubsequence;
