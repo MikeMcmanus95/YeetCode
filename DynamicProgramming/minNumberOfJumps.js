@@ -22,7 +22,7 @@ function minNumberOfJumps(array) {
 // j = 2
 //                                s
 // [3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3]
-function minNumberOfJumps(array) {
+function minNumOfJumps(array) {
 	let maxReach = array[0];
 	let jumps = 0;
 	let steps = array[0];
