@@ -47,3 +47,27 @@ const missingElement = function(nums, k) {
   }
   return currentNum;
 };
+
+
+const missingElementConstant = function(nums, k) {
+  let missingNumsCount = 0;
+  let idx = 0;
+  let currentNum = 0;
+  let lastNum = nums[nums.length - 1];
+  let difference = 0;
+  while (missingNumsCount < k) {
+      currentNum = nums[idx] || lastNum;
+      difference = nums[idx + 1] - currentNum;
+      while (difference > 1) {
+          currentNum++;
+          difference--;
+          missingNumsCount++;
+          if (missingNumsCount === k) break;
+      }
+      idx++;
+      if (idx === nums.length) {
+          return lastNum + k - missingNumsCount;
+      }
+  }
+  return currentNum;
+};
