@@ -31,3 +31,28 @@ var allPathsSourceTarget = function (graph) {
     });
   }
 };
+
+
+// SOLUTION 2:
+const allPathsSourceTarget = (graph) => {
+  const queue = [[0]];
+  const target = graph.length - 1;
+  const resultArray = [];
+  while (queue.length) {
+    let potentialPath = queue.shift();
+    let lastVertex = potentialPath[potentialPath.length - 1]
+    if (lastVertex === target) {
+      resultArray.push(potentialPath);
+    } else {
+      for (let vertex of graph[lastVertex]) {
+        let newPath = potentialPath.slice();
+        newPath.push(vertex);
+        queue.push(newPath);
+      }
+    }
+  }
+
+  return resultArray;
+}
+
+console.log(allPathsSourceTarget([[1,2], [3], [3], []])); // [[0, 1 3], [0, 2, 3]]
