@@ -51,7 +51,6 @@ const allPathsSourceTarget = (graph) => {
       }
     }
   }
-
   return resultArray;
 }
 
