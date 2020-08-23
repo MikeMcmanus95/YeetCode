@@ -56,3 +56,46 @@ function diskStacking(disks) {
 
 	return stackArray.reverse();
 }
+
+
+// Solution 2: AlgoExpert Clean
+// Time: O(n^2) | Space: O(n)
+function diskStack(disks) {
+  disks.sort((a, b) => a[2] - b[2]);
+	const heights = new Array(disks.length);
+	const sequences = new Array(disks.length).fill(null);
+	let maxHeightIdx = 0;
+
+	for (let i = 0; i < disks.length; i++) {
+		heights[i] = disks[i][2];
+	}
+
+	for (let i = 0; i < disks.length; i++) {
+		const currentDisk = disks[i];
+		for (let j = 0; j <= i; j++) {
+			const otherDisk = disks[j];
+			if (areValidDimensions(otherDisk, currentDisk)) {
+				if (heights[i] < heights[j] + currentDisk[2]) {
+					heights[i] = heights[j] + currentDisk[2];
+					sequences[i] = j;
+				}
+			}
+		}
+		if (heights[i] > heights[maxHeightIdx]) maxHeightIdx = i;
+	}
+
+	return buildSequence(disks, sequences, maxHeightIdx);
+}
+
+function areValidDimensions(o, c) {
+	return o[0] < c[0] && o[1] < c[1] && o[2] < c[2];
+}
+
+function buildSequence(disks, sequences, currentIdx) {
+	let sequence = [];
+	while (currentIdx !== null) {
+		sequence.push(disks[currentIdx]);
+		currentIdx = sequences[currentIdx];
+	}
+	return sequence.reverse();
+}
