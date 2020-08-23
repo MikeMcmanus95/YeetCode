@@ -34,24 +34,36 @@ var allPathsSourceTarget = function (graph) {
 
 
 // SOLUTION 2:
-const allPathsSourceTarget = (graph) => {
-  const queue = [[0]];
-  const target = graph.length - 1;
-  const resultArray = [];
-  while (queue.length) {
-    let potentialPath = queue.shift();
-    let lastVertex = potentialPath[potentialPath.length - 1]
-    if (lastVertex === target) {
-      resultArray.push(potentialPath);
-    } else {
-      for (let vertex of graph[lastVertex]) {
-        let newPath = potentialPath.slice();
-        newPath.push(vertex);
-        queue.push(newPath);
-      }
+/**
+ * @param {number[][]} graph
+ * @return {number[][]}
+ */
+
+
+/*
+Input: [[1,2],[3],[3],[]]
+Output: [[0,1,3],[0,2,3]]
+
+Q: [[0, 1, 3], ]
+*/
+const allPathsSourceTarget = function(graph) {
+    const resultArr = [];
+    const queue = [[0]];
+
+    while (queue.length) {
+        let path = queue.shift();
+        let lastVertexInPath = path[path.length - 1]
+        if (lastVertexInPath === graph.length - 1) {
+            resultArr.push(path);
+        } else {
+            for (let vertex of graph[lastVertexInPath]) {
+                let newPath = path.slice();
+                newPath.push(vertex);
+                queue.push(newPath);
+            }
+        }
     }
-  }
-  return resultArray;
-}
+    return resultArr;
+};
 
 console.log(allPathsSourceTarget([[1,2], [3], [3], []])); // [[0, 1 3], [0, 2, 3]]
