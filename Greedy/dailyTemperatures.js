@@ -19,3 +19,23 @@ const dailyTemperatures = function(T) {
   }
   return resultArr;
 };
+
+// Linear Solution Using a Stack
+// Video Explanation: https://www.youtube.com/watch?v=WGm4Kj3lhRI
+// Time: O(n) | Space: O(n)
+const dailyTemperaturesLinear = function(T) {
+  const resultArr = new Array(T.length);
+  const stack = [];
+  let currentIdx = T.length - 1;
+  while (currentIdx >= 0) {
+      let currentTemp = T[currentIdx];
+      while (stack.length && currentTemp >= stack[stack.length - 1][1]) {
+          stack.pop();
+      }
+      if (!stack.length) resultArr[currentIdx] = 0;
+      else resultArr[currentIdx] = stack[stack.length - 1][0] - currentIdx;
+      stack.push([currentIdx, currentTemp]);
+      currentIdx--;
+  }
+  return resultArr;
+};
