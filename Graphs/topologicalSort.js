@@ -1,3 +1,37 @@
+class JobNode {
+	constructor(job) {
+		this.job = job;
+		this.prereqs = [];
+		this.visited = false;
+		this.visiting = false;
+	}
+}
+class JobGraph {
+	constructor(jobs) {
+		this.nodes = [];
+		this.graph = {};
+		for (const job of jobs) {
+			this.addNode(job);
+		}
+	}
+
+	addPrereq(job, prereq) {
+		const jobNode = this.getNode(job);
+		const prereqNode = this.getNode(prereq);
+		jobNode.prereqs.push(prereqNode);
+	}
+
+	addNode(job) {
+		this.graph[job] = new JobNode(job);
+		this.nodes.push(this.graph[job]);
+	}
+
+	getNode(job) {
+		if (!this.graph[job]) this.addNode(job);
+		return this.graph[job];
+	}
+}
+
 /**
  *
  * @param {Array} jobs
@@ -45,6 +79,7 @@ function constructGraph(jobs, deps) {
 // Solution 2: Graph Class
 // Time: O(j + d) | Space: O(j + d)
 // Handles Cycles
+
 function topologicalSort(jobs, deps) {
 	const jobGraph = createJobGraph(jobs, deps);
 	return getOrderedJobs(jobGraph);
@@ -81,39 +116,43 @@ function depthFirstTraverse(node, orderedJobs) {
 	node.visited = true;
 	node.visiting = false;
 	orderedJobs.push(node.job);
+	return false;
 }
 
-class JobGraph {
-	constructor(jobs) {
-		this.nodes = [];
-		this.graph = {};
-		for (const job of jobs) {
-			this.addNode(job);
-		}
-	}
-
-	addPrereq(job, prereq) {
-		const jobNode = this.getNode(job);
-		const prereqNode = this.getNode(prereq);
-		jobNode.prereqs.push(prereqNode);
-	}
-
-	addNode(job) {
-		this.graph[job] = new JobNode(job);
-		this.nodes.push(this.graph[job]);
-	}
-
-	getNode(job) {
-		if (!this.graph[job]) this.addNode(job);
-		return this.graph[job];
-	}
+// ---------------------------------------------------------------------------//
+// Solution 3: Graph Class And Deps
+// Time: O(j + d) | Space: O(j + d)
+// Handles Cycles
+function topologicalSort(jobs, deps) {
+	const jobGraph = createJobGraph(jobs, deps);
+	return getOrderedJobs(jobGraph);
 }
 
-class JobNode {
-	constructor(job) {
-		this.job = job;
-		this.prereqs = [];
-		this.visited = false;
-		this.visiting = false;
+function createJobGraph(jobs, deps) {
+	const graph = new JobGraph(jobs);
+	// Adding edges
+	for (const [job, dep] of deps) {
+		graph.addDep(job, dep);
+	}
+	return graph;
+}
+
+function getOrderedJobs(graph) {
+	const orderedJobs = [];
+	const nodesWithNoPrereqs = graph.nodes.filter((node) => !node.numOfPrereqs);
+	while (nodesWithNoPrereqs.length) {
+		const node = nodesWithNoPrereqs.pop();
+		orderedJobs.push(node.job);
+		removeDeps(node, nodesWithNoPrereqs);
+	}
+	const graphHasEdges = graph.nodes.some((node) => node.numOfPrereqs);
+	return graphHasEdges ? [] : orderedJobs;
+}
+
+function removeDeps(node, nodesWithNoPrereqs) {
+	while (node.deps.length) {
+		const dep = node.deps.pop();
+		dep.numOfPrereqs--;
+		if (dep.numOfPrereqs === 0) nodesWithNoPrereqs.push(dep);
 	}
 }
