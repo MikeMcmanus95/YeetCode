@@ -1,0 +1,7 @@
+unicomp6.unicomp.net - - [timestamp] "GET something/somethingAPI.com" 200 3091
+unicomp7.unicomp.net - - [timestamp] "GET something/somethingAPI.com" 201 1200
+unicomp8.unicomp.net - - [timestamp] "PUT something/somethingAPI.com" 304 31245
+unicomp9.unicomp.net - - [timestamp] "GET something/somethingAPI.com" 500 391
+unicomp0.unicomp.net - - [timestamp] "POST something/somethingAPI.com" 404 0
+unicomp10.unicomp.net - - [timestamp] "GET something/somethingAPI.com" 204 40032
+unicomp11.unicomp.net - - [timestamp] "DELETE something/somethingAPI.com" 200 4012
