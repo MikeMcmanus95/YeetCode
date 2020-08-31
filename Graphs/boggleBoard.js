@@ -1,5 +1,5 @@
 // AlgoExpert URL: https://www.algoexpert.io/questions/Boggle%20Board
-// Time: O(nm + ws * 8^s) | Space: O(nm + ws)
+// Time: O(nm * 8^s + ws) | Space: O(nm + ws)
 function boggleBoard(board, words) {
   const trie = new Trie();
 	for (const word of words) {
