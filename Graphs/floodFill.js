@@ -6,6 +6,7 @@
  * @param {number} newColor
  * @return {number[][]}
  */
+// Time: O(n) | Space: O(n)
 const floodFill = function(image, sr, sc, newColor) {
   let stack = [[sr, sc]];
   let originalColor = image[sr][sc];
