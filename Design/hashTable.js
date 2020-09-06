@@ -6,7 +6,7 @@ class HashTable {
     this.keyMap = new Array(size);
   }
 
-  _hash(key) {
+  hash(key) {
     let total = 0;
     let WEIRD_PRIME = 31;
     for (let i = 0; i < Math.min(key.length, 100); i++) {
@@ -18,6 +18,9 @@ class HashTable {
   }
 }
 
-console.log(hash("pink", 13));
-console.log(hash("green", 13));
-console.log(hash("cyan", 13));
+const hashTable = new HashTable();
+
+
+console.log(hashTable.hash("12", 13));
+console.log(hashTable.hash("green", 13));
+console.log(hashTable.hash("cyan", 13));
