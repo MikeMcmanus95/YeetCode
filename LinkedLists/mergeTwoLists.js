@@ -35,3 +35,34 @@ var mergeTwoLists = function(l1, l2) {
   }
   return tempNode.next;
 };
+
+// AlgoExpert URL: https://www.algoexpert.io/questions/Merge%20Linked%20Lists
+
+// Time: O(n + m) | Space: O(1)
+function mergeLinkedLists(headOne, headTwo) {
+	let firstPointer = headOne;
+	let secondPointer = headTwo;
+	let prevPointer = null;
+
+	while (firstPointer && secondPointer) {
+		if (prevPointer === null && secondPointer.value < firstPointer.value) {
+			prevPointer = secondPointer;
+			secondPointer = secondPointer.next;
+			prevPointer.next = firstPointer;
+		} else if (secondPointer.value < firstPointer.value) {
+			prevPointer.next = secondPointer;
+			prevPointer = secondPointer;
+			secondPointer = secondPointer.next;
+			prevPointer.next = firstPointer;
+		} else {
+			prevPointer = firstPointer;
+			firstPointer = firstPointer.next;
+		}
+	}
+
+	if (!firstPointer && secondPointer) {
+		prevPointer.next = secondPointer;
+	}
+
+	return headOne.value > headTwo.value ? headTwo : headOne;
+}
