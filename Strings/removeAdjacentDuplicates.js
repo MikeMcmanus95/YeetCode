@@ -32,3 +32,29 @@ const removeDuplicates = function (s, k) {
 
   return s;
 };
+
+
+const removeDuplicatesStack = (string, k) => {
+  const stack = [];
+  let resultStr = '';
+
+  for (let i = 0; i < string.length; i++) {
+    let char = string[i];
+    let peek = stack.length - 1;
+
+    if (stack[peek] && stack[peek].character === char) {
+      stack[peek].count++
+      if(stack[peek].count == k) stack.pop();
+    }
+    else {
+      stack.push({ character: char, count: 1 });
+    }
+  }
+
+  for (let {character, count} of stack) {
+    resultStr += character.repeat(count);
+  }
+  return resultStr;
+}
+
+console.log(removeDuplicatesStack("deeedbbcccbdaa", 3)) // 'aa'
