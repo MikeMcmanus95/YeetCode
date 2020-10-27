@@ -1,5 +1,5 @@
 /*
-start: 0
+https://medium.com/@codingwithmanny/how-to-solve-the-counting-valleys-challenge-f7c6cac95d25
 Valley: below sea level (0) __
 Given: string of Up or Down "steps"
 U - Up
