@@ -34,3 +34,45 @@ function spiralTraverse(array) {
 
   return result;
 }
+
+
+var spiralOrder = function(matrix) {
+  const res = []
+  while(matrix.length){
+    // add curr row
+    const first = matrix.shift()
+    res.push(...first)
+    for(const row of matrix){
+      let val = row.pop()
+      // grab the end column values
+      if(val){
+        res.push(val)
+        // flip the row for next time to grab opposite side's column
+        row.reverse()
+      }
+    }
+    //flip the grid, to grab opposite row next time
+    matrix.reverse()
+  }
+  return res
+}
+
+
+let input1 =
+[
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+// Output: [1,2,3,6,9,8,7,4,5]
+
+let input2 =
+[
+  [1, 2, 3, 4],
+  [5, 6, 7, 8],
+  [9,10,11,12]
+]
+// Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+
+console.log(spiralOrder(input1))
+// console.log(spiralOrder(input2))
