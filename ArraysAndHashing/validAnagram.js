@@ -13,14 +13,26 @@ Time: O(n+m) | Space: O(n)
 */
 
 function validAnagram(s, t) {
-    const set = new Set();
-  
-    for (let num of nums) {
-        if (set.has(num)) {
-            return true;
-        }
-        set.add(num);
+    if (s.length !== t.length) {
+        return false;
     }
-  
-    return false;
-  }
+    
+    const map = {};
+
+    for (let char of s) {
+        if (!map[char]) {
+            map[char] = 1;
+        } else {
+            map[char]++;
+        }
+    }
+
+    for (let char of t) {
+        map[char]--;
+        if (map[char] === 0) {
+            delete map[char];
+        }
+    }
+
+    return !Object.keys(map).length;
+}
