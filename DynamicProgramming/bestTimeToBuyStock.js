@@ -1,20 +1,29 @@
-// leetcode URL https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+/*
+Leetcode 121
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+You are given an array prices where prices[i] is the price of a given stock on the ith day.
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+Example 1:
+
+Input: prices = [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+*/
 
 const maxProfit = function(prices) {
-  let profit = 0;
-  let min = Infinity,
-    minDex = 0;
+  let maxProfit = 0,
+  minSoFar = prices[0];
 
-  for (let i = 0; i < prices.length; i++) {
-    if (prices[i] < min) {
-      min = prices[i];
-      minDex = i;
-      for (let i = minDex; i < prices.length; i++) {
-        let difference = prices[i] - min;
-        if (difference > profit) profit = difference;
-      }
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < minSoFar) {
+        minSoFar = prices[i];
+    } else {
+        maxProfit = Math.max(maxProfit, prices[i] - minSoFar);
     }
   }
 
-  return profit;
+return maxProfit;
 };
