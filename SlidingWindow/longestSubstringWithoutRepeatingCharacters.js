@@ -56,18 +56,18 @@ function nonRepeatSubstring(str) {
 function nonRepeatSubstring(s) {
   let start = 0,
       maxLength = -Infinity;
-  const map = {};
+  const charIndexMap = {};
 
   for (let end = 0; end < s.length; end++) {
     let char = s[end];
 
-    if (char in map) {
-      start = Math.max(start, map[char] + 1);
+    if (char in charIndexMap) {
+      start = Math.max(start, charIndexMap[char] + 1);
     }
 
     maxLength = Math.max(maxLength, end - start + 1);
   
-    map[char] = end;
+    charIndexMap[char] = end;
   }
 
   return maxLength;
