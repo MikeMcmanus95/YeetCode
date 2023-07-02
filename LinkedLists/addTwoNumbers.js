@@ -9,41 +9,66 @@ Example:
 Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
 Output: 7 -> 0 -> 8
 Explanation: 342 + 465 = 807
+
+Time: O(n + m) | Space: O(1)
 */
 
 const addTwoNumbers = function (l1, l2) {
-  let resultHead = new ListNode(0);
-  let resultHeadPointer = resultHead;
-  let carry = false;
-  while (l1 !== null || l2 !== null) {
-    if (l1 && l2) {
-      resultHeadPointer.val = l1.val + l2.val;
-      l1 = l1.next;
-      l2 = l2.next;
-    } else if (l1 === null) {
-      resultHeadPointer.val = l2.val;
-      l2 = l2.next;
-    } else {
-      resultHeadPointer.val = l1.val;
-      l1 = l1.next;
-    }
-
-    if (carry) {
-      resultHeadPointer.val += 1;
-      carry = false;
-    }
-    if (resultHeadPointer.val >= 10) {
-      carry = true;
-      resultHeadPointer.val = resultHeadPointer.val % 10;
-    }
-
-    if (l1 || l2) {
-      resultHeadPointer.next = new ListNode(0);
-      resultHeadPointer = resultHeadPointer.next;
-    }
+  let resultHead = new ListNode(-1);
+  let r1 = resultHead;
+  let carry = 0;
+  
+  while (l1 || l2) {
+      let sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + carry;
+      
+      r1.next = new ListNode(sum % 10);
+      carry = Math.floor(sum/10);
+      
+      l1 = l1 ? l1.next : null;
+      l2 = l2 ? l2.next : null;
+      r1 = r1.next;
   }
+      
   if (carry) {
-    resultHeadPointer.next = new ListNode(1);
+      r1.next = new ListNode(carry);
   }
-  return resultHead;
+      
+  return resultHead.next;
 };
+
+// const addTwoNumbers = function (l1, l2) {
+//   let resultHead = new ListNode(0);
+//   let resultHeadPointer = resultHead;
+//   let carry = false;
+//   while (l1 !== null || l2 !== null) {
+//     if (l1 && l2) {
+//       resultHeadPointer.val = l1.val + l2.val;
+//       l1 = l1.next;
+//       l2 = l2.next;
+//     } else if (l1 === null) {
+//       resultHeadPointer.val = l2.val;
+//       l2 = l2.next;
+//     } else {
+//       resultHeadPointer.val = l1.val;
+//       l1 = l1.next;
+//     }
+
+//     if (carry) {
+//       resultHeadPointer.val += 1;
+//       carry = false;
+//     }
+//     if (resultHeadPointer.val >= 10) {
+//       carry = true;
+//       resultHeadPointer.val = resultHeadPointer.val % 10;
+//     }
+
+//     if (l1 || l2) {
+//       resultHeadPointer.next = new ListNode(0);
+//       resultHeadPointer = resultHeadPointer.next;
+//     }
+//   }
+//   if (carry) {
+//     resultHeadPointer.next = new ListNode(1);
+//   }
+//   return resultHead;
+// };
