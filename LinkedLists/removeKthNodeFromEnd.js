@@ -1,3 +1,51 @@
+/*
+Leetcode 19
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+Example 1:
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
+
+Time: O(n) | Space: O(1)
+*/
+class ListNode(val, next) {
+  this.val = val === undefined ? 0 : val;
+  this.next = null === undefined ? next : next;
+}
+
+function removeNthFromEnd(head, n) {
+  //Edge Case
+  if (head === null) return -1;
+  if (n === 0) return head;
+
+  let dummyhead = new ListNode(null, head);
+
+  let p1 = dummyhead;
+  let p2 = dummyhead;
+
+  //figure out where p1 starts
+  while (n > 0) {
+  p1 = p1.next;
+  n--
+  }
+  
+  if (p1 === null) return -1
+
+  //move p1 and p2 at the same time
+  while (p1 && p1.next) {
+  p1 = p1.next;
+  p2 = p2.next;
+  }
+
+  //rewire p2
+  p2.next = p2.next.next
+
+  return dummyhead.next;
+}
+
+
+//------------------------------------------------------------------------------------
 // AlgoExpert URL: https://www.algoexpert.io/questions/Remove%20Kth%20Node%20From%20End
 
 class LinkedList {

@@ -19,32 +19,29 @@ Output: [1,1,2,3,4,4]
   
   Time: O(n) | Space: O(1)
   
- /
+ */
 
-var mergeTwoLists = function(l1, l2) {
-  let tempNode = new ListNode(0);
-  let currNode = tempNode;
+var mergeTwoLists = function(list1, list2) {
+    
+    let p1 = list1;
+    let p2 = list2;
+    let dummy = new ListNode(-1);
+    let curr = dummy;
+    
+    while (p1 && p2) {
+        if (p1.val <= p2.val) {
+            curr.next = p1;
+            p1 = p1.next;
+        } else {
+            curr.next = p2;
+            p2 = p2.next;
+        }
+        curr = curr.next;
+    }
 
-  while (l1 && l2) {
-      if (l1.val < l2.val) {
-          currNode.next = l1;
-          l1 = l1.next;
-      } else {
-          currNode.next = l2;
-          l2 = l2.next;
-      }
-      currNode = currNode.next;
-  }
-  if (l1 !== null) {
-      currNode.next = l1;
-      l1 = l1.next;
-  }
+    curr.next = p1 || p2;
 
-  if (l2 !== null) {
-      currNode.next = l2;
-      l2 = l2.next;
-  }
-  return tempNode.next;
+    return dummy.next;
 };
 
 // AlgoExpert URL: https://www.algoexpert.io/questions/Merge%20Linked%20Lists
