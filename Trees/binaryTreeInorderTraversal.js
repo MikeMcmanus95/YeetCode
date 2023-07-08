@@ -13,6 +13,7 @@ Input: root = []
 Output: []
 
 Traversal is left subtree, root then right subtree
+Time: O(n) | Space: O(h)
 */
 
 

@@ -31,6 +31,7 @@ iterative
 The key is to use a stack to store nodes whose values haven’t been pushed yet.
 So for pre-order traversal, we only need to store right values on the stack,
 because left values can be immediately pushed to result.
+Time: O(n) | Space: O(h)
 */
 function preorderTraversal(root) {
     const result = [];
