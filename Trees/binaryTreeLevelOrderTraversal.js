@@ -14,6 +14,8 @@ Output: [[1]]
 Time: O(n) because each node needs to be pushed onto the queue exactly once | Space: O(n) for the queue which will be at most N because each node is pushed into the queue exactly once
 */
 
+//Iterative Solution
+//Time: O(N) | Space: O(N)
 function levelOrder(root) {
     if (!root) return [];
     const result = [];
@@ -34,3 +36,22 @@ function levelOrder(root) {
 
     return result;
 }
+
+//Recursive DFS Solution
+//Time: O(N) | Space: O(N)
+var levelOrder = function(root) {
+    const result = [];
+    
+    function traverse(node, level) {
+        if(!node) return;
+        
+        if(!result[level]) result[level] = [node.val];
+        else result[level].push(node.val);
+        
+        traverse(node.left, level+1);
+        traverse(node.right, level+1);
+    }
+    
+    traverse(root, 0);
+    return result;
+};

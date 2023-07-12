@@ -1,4 +1,5 @@
 /*
+Leetcode 98
 Leetcode URL: https://leetcode.com/problems/validate-binary-search-tree/
 Given a binary tree, determine if it is a valid binary search tree (BST).
 
@@ -28,7 +29,50 @@ Example 2:
 Input: [5,1,4,null,null,3,6]
 Output: false
 Explanation: The root node's value is 5 but its right child's value is 4.
+
+Example
+                 20
+              /     \
+           10        30
+            \
+              18
+            /   \
+         9      19
+
+The recursion call will be the following:
+
+isValidBST(root: 20, min = -Infinity, max = Infinity)
+  isValidBST(root: 10, min = -Infinity, max = 20)
+    isValidBST(root: 18, min = 10, max = 20)
+      isValidBST(root: 9, min = 10, max = 18): false, though 9 < 18 < 19, 9 is lower than the min=10, so it will return false.
 */
+
+//Recursive
+var isValidBST = function(root, min = -Infinity, max = Infinity) {
+  if(!root) return true;
+  if(root.val <= min || root.val >= max) return false;
+  return isValidBST(root.right, root.val, max) && isValidBST(root.left, min, root.val)
+};
+
+//Iterative
+var isValidBST = function(root) {
+  const stack = [[-Infinity, Infinity, root]];
+  
+  while (stack.length) {
+    const [ min, max, node ] = stack.pop();
+    if (!node) continue;
+    
+    if (node.val <= min || node.val >= max) return false;
+      
+    stack.push(
+      [node.val, max, node.right],
+      [min, node.val, node.left],
+    );
+  }
+  
+  return true;
+};
+
 
 const isValidBST = function (root) {
   let current = root;
