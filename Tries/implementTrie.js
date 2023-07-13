@@ -68,10 +68,10 @@ class Trie {
   }
 
   //search word, return true or return false early if it's not there
-  startsWith(word) {
+  startsWith(prefix) {
       let curr = this.root;
 
-      for (const char of word) {
+      for (const char of prefix) {
           if (!curr.children[char]) {
               return false;
           } else {
