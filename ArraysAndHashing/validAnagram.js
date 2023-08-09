@@ -21,10 +21,9 @@ function validAnagram(s, t) {
 
     for (let char of s) {
         if (!map[char]) {
-            map[char] = 1;
-        } else {
-            map[char]++;
+            map[char] = 0;
         }
+        map[char]++;
     }
 
     for (let char of t) {
