@@ -14,18 +14,19 @@ Time: O(n) | Space: O(1)
 */
 
 var merge = function(nums1, m, nums2, n) {
-    let p1 = m - 1;
+    //pointers needs to start at last non zero number
+    let p1 = m - 1; 
     let p2 = n - 1;
  
     for (let i = nums1.length - 1; i >= 0; i--) {
-        let p1val = nums1[p1];
-        let p2val = nums2[p2];
+        let val1 = nums1[p1];
+        let val2 = nums2[p2];
         
-        if (p1 >= 0 && p1val >= p2val) {
-            nums1[i] = p1val;
+        if (p1 >= 0 && val1 >= val2) { //check if p1 is still within bounds and if the value of 1 >= value of 2
+            nums1[i] = val1;
             p1--;
-        } else if (p2 >= 0) {
-            nums1[i] = p2val;
+        } else if (p2 >= 0) { //check if p2 is still within bounds
+            nums1[i] = val2;
             p2--;
         }
     }
