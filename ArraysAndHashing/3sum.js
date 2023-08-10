@@ -17,35 +17,34 @@ Notice that the order of the output and the order of the triplets does not matte
 Time: O(n log n) | Space: O(n)
 */
 
-function threeSum(nums) {
-    const result = [];
+var threeSum = function(nums) {
     nums.sort((a, b) => a - b);
-    let sum = 0;
+    const result = [];
 
     for (let i = 0; i < nums.length; i++) {
         let left = i + 1;
         let right = nums.length - 1;
 
-        if (nums[i] === nums[i - 1]) {
-            continue;
-        }
+        if (nums[i] === nums[i - 1]) continue; //checks for duplicates and makes sure your i isn't a duplicate of the one before it
 
         while (left < right) {
-            sum = nums[i] + nums[left] + nums[right];
+            let sum = nums[i] + nums[left] + nums[right];
 
             if (sum === 0) {
                 result.push([nums[i], nums[left], nums[right]]);
-                left++;
-                while (nums[left] === nums[left - 1]) {
+                left++; //even though you've found a triplet, you want to keep looking for more triplets with i being stationary
+                while (nums[left] === nums[left - 1]) { //checks for duplicates by comparing it to the one before it
                     left++;
                 }
-            } else if (sum < 0) {
-                left++;
-            } else {
+            } else if (sum > 0) {
                 right--;
+            } else {
+                left++;
             }
         }
+        
     }
+
 
     return result;
 };

@@ -18,24 +18,23 @@ Time: O(n) | Space: O(1) if it's limited to only the 26 letters in the US alphab
 */
 
 function firstUniqueChar(s) {
-  const map = {};
+    const map = {};
 
-  for (const char of s) {
-      if (map[char]) {
-          map[char]++;
-      } else {
-          map[char] = 1;
-      }
-  }
+    for (const char of s) {
+        if (!map[char]) {
+            map[char] = 0;
+        }
+        map[char]++;
+    }
 
-  for (let i = 0; i < s.length; i++) {
-      if (map[s[i]] === 1) {
-          return i;
-      }
-  }
+    for (let i = 0; i < s.length; i++) {
+        let char = s[i];
+        if (map[char] === 1) {
+            return i;
+        }
+    }
 
-  return -1;
-
+    return -1;
 }
 
 
