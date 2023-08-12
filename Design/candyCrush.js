@@ -1,4 +1,76 @@
-// Leetcode URL: https://leetcode.com/problems/candy-crush
+/*Leetcode 723
+URL: https://leetcode.com/problems/candy-crush
+
+This question is about implementing a basic elimination algorithm for Candy Crush.
+
+Given an m x n integer array board representing the grid of candy where board[i][j] represents the type of candy. A value of board[i][j] == 0 represents that the cell is empty.
+
+The given board represents the state of the game following the player's move. Now, you need to restore the board to a stable state by crushing candies according to the following rules:
+
+If three or more candies of the same type are adjacent vertically or horizontally, crush them all at the same time - these positions become empty.
+After crushing all candies simultaneously, if an empty space on the board has candies on top of itself, then these candies will drop until they hit a candy or bottom at the same time. No new candies will drop outside the top boundary.
+After the above steps, there may exist more candies that can be crushed. If so, you need to repeat the above steps.
+If there does not exist more candies that can be crushed (i.e., the board is stable), then return the current board.
+You need to perform the above rules until the board becomes stable, then return the stable board.
+*/
+
+var candyCrush = function(board) {
+    if (!board) return board;
+
+    let done = true;
+
+    //find horizontal triplets and mark them as negative. Stop 2 columns before the end
+    for (let row = 0; row < board.length; row++) {
+      for (let col = 0; col + 2 < board[0].length; col++) {
+        let candy1 = Math.abs(board[row][col]);
+        let candy2 = Math.abs(board[row][col + 1]);
+        let candy3 = Math.abs(board[row][col + 2]);
+
+        if (candy1 && candy1 === candy2 && candy2 === candy3) {
+          board[row][col] = board[row][col + 1] = board[row][col + 2] = -candy1;
+          done = false;
+        }
+      }
+    }
+
+    //find vertical triplets and mark them as negative
+    for (let col = 0; col < board[0].length; col++) {
+      for (let row = 0; row + 2 < board.length; row++) {
+        let candy1 = Math.abs(board[row][col]);
+        let candy2 = Math.abs(board[row + 1][col]);
+        let candy3 = Math.abs(board[row + 2][col]);
+
+        if (candy1 && candy1 === candy2 && candy2 === candy3) {
+          board[row][col] = board[row + 1][col] = board[row + 2][col] = -candy1;
+          done = false;
+        }
+      }
+    }
+
+    //2 pointer to write the positive number where the negative numbers are. if you rotate the board clockwise 90 degrees
+    //then bottomIndex is on the left and row pointer will move until it finds a positive number and rewrites it into bottomIndex
+    if (!done) {
+      for (let col = 0; col < board[0].length; col++) {
+        let bottomIndex = board.length - 1; //pointer1 will stay put when it finds a negative number
+
+        for (let row = board.length - 1; row >= 0; row--) {//pointer2
+          if (board[row][col] > 0) {
+            board[bottomIndex][col] = board[row][col]; //this will move the positive number at the row pointer down to bottomIndex pointer
+            bottomIndex--;
+          }
+        }
+
+        while (bottomIndex >= 0) {//fill in the zeroes
+          board[bottomIndex][col] = 0;
+          bottomIndex--;
+        }
+      }
+    }
+
+    return done ? board : candyCrush(board);
+};
+
+
 
 /**
  * @param {number[][]} board
