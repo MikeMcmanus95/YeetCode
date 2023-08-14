@@ -1,4 +1,6 @@
+
 /*
+Leetcode 234
 https://leetcode.com/problems/palindrome-linked-list/
 
 Given a singly linked list, determine if it is a palindrome.
@@ -11,27 +13,63 @@ Example 2:
 Input: 1->2->2->1
 Output: true
 
-size = 7 / 2 = 4 (ceil) + 1
-
-1->1->2->2->1->1
-
-2->1->1->2->1->1
-p1       X  p2
-2->1->1->3->2->1->1
-
-
-Approach:
--Get our size of the LL
--Divide size by 2
-  -If size is even: p1 = size / 2 && p2 = (size / 2) + 1
-  -Else: p1 = Math.ceil(size/2) - 1 && p2 = Math.ceil(size / 2) + 1
--Reverse first half of LL up to and equal to p1
--Traverse new LL using p1 and p2
-  -If p1.val !== p2.val: return false
--Return true
+Time: O(n) | Space: O(1)
 */
 
+var isPalindrome = function(head) {
+  //1. find the middle
+  let slow = head,
+      fast = head;
+
+  while (fast && fast.next) {
+      slow = slow.next;
+      fast = fast.next.next;
+  }
+
+  //2. reverse the second half
+  let reverse = null;
+  while (slow) {
+      let next = slow.next;
+      slow.next = reverse;
+      reverse = slow;
+      slow = next;
+  }
+
+
+  //3. compare left and right pointers
+  let p1 = head;
+  let p2 = reverse;
+
+  while (p2 !== null) {
+      if (p1.val !== p2.val) {
+          return false;
+      }
+      p1 = p1.next;
+      p2 = p2.next;
+  }
+
+  return true;
+};
+
 // Definition for singly-linked list.
+// size = 7 / 2 = 4 (ceil) + 1
+
+// 1->1->2->2->1->1
+
+// 2->1->1->2->1->1
+// p1       X  p2
+// 2->1->1->3->2->1->1
+
+
+// Approach:
+// -Get our size of the LL
+// -Divide size by 2
+//   -If size is even: p1 = size / 2 && p2 = (size / 2) + 1
+//   -Else: p1 = Math.ceil(size/2) - 1 && p2 = Math.ceil(size / 2) + 1
+// -Reverse first half of LL up to and equal to p1
+// -Traverse new LL using p1 and p2
+//   -If p1.val !== p2.val: return false
+// -Return true
 function ListNode(val, next) {
   this.val = (val===undefined ? 0 : val)
   this.next = (next===undefined ? null : next)
