@@ -14,16 +14,17 @@ Time: O(n + m) | Space: O(1)
 */
 
 const addTwoNumbers = function (l1, l2) {
-  let resultHead = new ListNode(-1);
-  let r1 = resultHead;
+  let resultHead = new ListNode(-1); //result LL
+  let r1 = resultHead; //pointer at the head of result LL
   let carry = 0;
   
   while (l1 || l2) {
-      let sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + carry;
+      let sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + carry; //sum equal to the values plus carry
       
-      r1.next = new ListNode(sum % 10);
-      carry = Math.floor(sum/10);
+      r1.next = new ListNode(sum % 10); //r.next points to sum % 10
+      carry = Math.floor(sum/10); //update carry
       
+      //update 3 pointers
       l1 = l1 ? l1.next : null;
       l2 = l2 ? l2.next : null;
       r1 = r1.next;
@@ -33,7 +34,7 @@ const addTwoNumbers = function (l1, l2) {
       r1.next = new ListNode(carry);
   }
       
-  return resultHead.next;
+  return resultHead.next; //return result LL
 };
 
 // const addTwoNumbers = function (l1, l2) {
