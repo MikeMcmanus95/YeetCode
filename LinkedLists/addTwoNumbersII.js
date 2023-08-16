@@ -27,14 +27,14 @@ var addTwoNumbers = function(l1, l2) {
     
     while (stack1.length || stack2.length) {
         let sum = (stack1.length ? stack1.pop() : 0) + (stack2.length ? stack2.pop() : 0) + carry;
-        carry = +(sum >= 10); //if the expression is true +1, if the expression is false then carry = 0
+        carry = +(sum >= 10); //if the expression is true then carry = +1, if the expression is false then carry = +0
         //or you can do carry = Math.floor(sum/10)
-        
+
         result = new ListNode(sum % 10, result);
     }
     
     if (carry) {
-        result = new ListNode(1, result);
+        result = new ListNode(carry, result);
     }
     
     return result;
