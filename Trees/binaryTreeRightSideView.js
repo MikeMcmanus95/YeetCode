@@ -15,3 +15,28 @@ Input: root = [1,null,3]
 Output: [1,3]
 */
 
+//level by level order traversal
+var rightSideView = function(root) {
+    if (!root) return [];
+
+    let queue = [root];
+    const result = [];
+
+    while (queue.length) {
+        let size = queue.length;
+        let nextGen = [];
+
+        for (let i = 0; i < size; i++) {
+            let curr = queue.shift();
+
+            if (!queue.length) result.push(curr.val);
+            //if (i === size - 1) result.push(curr.val);
+            
+            if (curr.left) nextGen.push(curr.left);
+            if (curr.right) nextGen.push(curr.right); 
+        }
+        queue = nextGen;
+    }
+
+    return result;
+};
