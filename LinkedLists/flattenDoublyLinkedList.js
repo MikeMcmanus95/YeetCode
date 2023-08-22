@@ -18,22 +18,25 @@ Time: O(n) | Space: O(n)
 
 var flatten = function(head) {
     if (!head) return;
-    let stack = [head]
-    let nodeHead = null
-    let node;
     
-    while (stack.length){
-        node = stack.pop()
-        if (!nodeHead) nodeHead = node;
-        else {
-            nodeHead.next = node;
-            node.prev = nodeHead;
-            nodeHead = node
+    const stack = [head];
+    let p1;
+    
+    while (stack.length) {
+        const curr = stack.pop();
+        
+        if (!p1) {
+            p1 = curr;
+        } else {
+            //rewire
+            p1.next = curr;
+            curr.prev = p1;
+            p1 = curr;
         }
         
-        if (node.next) stack.push(node.next)
-        if (node.child) stack.push(node.child)
-        node.child = null
+        if (curr.next) stack.push(curr.next);
+        if (curr.child) stack.push(curr.child);
+        curr.child = null;
     }
     
     return head;

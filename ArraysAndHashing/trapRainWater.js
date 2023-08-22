@@ -1,4 +1,7 @@
 /*
+Leetcode 42
+https://leetcode.com/problems/trapping-rain-water/description/
+
 You are given an integer array height of length n. There are n vertical lines drawn 
 such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
 
@@ -18,6 +21,41 @@ Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,
 In this case, the max area of water (blue section) the container can contain is 49.
 */
 
+//Two Pointer Solution
+var trap = function(height) {
+  let trappedWater = 0;
+  let left = 0,
+      right = height.length - 1,
+      leftMaxHeight = height[0],
+      rightMaxHeight = height[height.length - 1],
+      currHeight;
+
+  while (left < right) {
+      if (leftMaxHeight < rightMaxHeight) {
+          //move pointer
+          left++;
+
+          //update leftMax
+          currHeight = height[left];
+          leftMaxHeight = Math.max(leftMaxHeight, currHeight)
+
+          //update trappedWater
+          trappedWater += leftMaxHeight - currHeight;
+      } else {
+          //move pointer
+          right--;
+          
+          //update rightMax
+          currHeight = height[right];
+          rightMaxHeight = Math.max(rightMaxHeight, currHeight)
+
+          //update trappedWater
+          trappedWater += rightMaxHeight - currHeight;
+      }
+  }
+
+  return trappedWater;
+};
 
 // Intial Brute Force - Exceeds Leetcode time
 // Time: O(n ^ 2) | Space: O(1)
