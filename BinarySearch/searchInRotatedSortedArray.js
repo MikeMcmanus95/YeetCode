@@ -26,24 +26,22 @@ Output: -1
 */
 
 var search = function(nums, target) {
-    let low = 0, 
+    let low = 0,
         high = nums.length - 1;
 
     while (low <= high) {
         let mid = Math.floor((low + high) / 2);
 
-        if (nums[mid] === target) {
-            return mid;
-        }
-
-        if (nums[low] <= nums[mid]) {
-            if (nums[low] <= target && target < nums[mid]) {
+        if (nums[mid] === target) return mid;
+    
+        if (nums[low] <= nums[mid]) { //working in the left half
+            if (nums[low] <= target && target < nums[mid]) { //if target is within the bounds of low and mid, move high to get rid of the right half
                 high = mid - 1;
             } else {
                 low = mid + 1;
             }
-        } else {
-            if (nums[mid] < target && target <= nums[high]) {
+        } else { //working in the right half
+            if (nums[mid] < target && target <= nums[high]) { //if target is within the bounds of mid and high, move low to get rid of the left half
                 low = mid + 1;
             } else {
                 high = mid - 1;
