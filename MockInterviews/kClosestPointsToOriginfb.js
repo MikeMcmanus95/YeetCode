@@ -35,34 +35,35 @@ function nearestNPoints(n, points) {
     return result.slice(0,n).map(obj => obj.point);
 }
 
-//Optimal Approach: Build a heap like structure using an array because the heap size is always size n even for an input of a billion items
 function nearestNPoints(n, points) {
     const result = [];
   
     for (const point of points) {
-      let hypotenuse = Math.pow(point.x, 2) + Math.pow(point.y, 2);
+      const hypotenuse = Math.pow(point.x, 2) + Math.pow(point.y, 2);
       
       //edge case when the result array is empty
       if (!result.length) {
         result.push({
           point: point, 
-          hypotenuse: Math.abs(hypotenuse)
+          hypotenuse: hypotenuse
         });
         continue;
       }
       
       //if result length hasn't been met and the current hypotenuse is less than the last element's hypotenuse in the result array
       if (result.length < n || hypotenuse < result[result.length - 1].hypotenuse) {
-        // insert in sorted order
         const indexToInsertAt = result.findIndex(temp => hypotenuse < temp.hypotenuse);
+  
+        const obj = {
+          point: point, 
+          hypotenuse: hypotenuse
+        }
         
+        // insert in sorted order
         if (indexToInsertAt === -1) { //can't find a place to insert in the middle of the result array, so you add it to the end
-          result.push({
-            point: point, 
-            hypotenuse: hypotenuse
-          });
+          result.push(obj);
         } else { //insert in the middle
-          result.splice(indexToInsertAt, 0, {point: point, hypotenuse: hypotenuse});
+          result.splice(indexToInsertAt, 0, obj);
         }
   
         // remove last object from result array, if length is > n
