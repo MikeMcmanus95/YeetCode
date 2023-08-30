@@ -35,27 +35,42 @@ function nearestNPoints(n, points) {
     return result.slice(0,n).map(obj => obj.point);
 }
 
+//Optimal Approach: Build a heap like structure using an array because the heap size is always size n even for an input of a billion items
 function nearestNPoints(n, points) {
-    const nearest = [];
+    const result = [];
+  
     for (const point of points) {
-      const hypotenuse = Math.pow(point.x, 2) + Math.pow(point.y, 2);
-      if (nearest.length === 0) {
-        nearest.push({point: point, hypotenuse: hypotenuse});
+      let hypotenuse = Math.pow(point.x, 2) + Math.pow(point.y, 2);
+      
+      //edge case when the result array is empty
+      if (!result.length) {
+        result.push({
+          point: point, 
+          hypotenuse: Math.abs(hypotenuse)
+        });
         continue;
       }
-      if (nearest.length < n || hypotenuse < nearest[nearest.length - 1].hypotenuse) {
+      
+      //if result length hasn't been met and the current hypotenuse is less than the last element's hypotenuse in the result array
+      if (result.length < n || hypotenuse < result[result.length - 1].hypotenuse) {
         // insert in sorted order
-        const indexToInsertAt = nearest.findIndex(existing => existing.hypotenuse > hypotenuse);
-        if (indexToInsertAt === -1) {
-          nearest.push({point: point, hypotenuse: hypotenuse});
-        } else {
-          nearest.splice(indexToInsertAt, 0, {point: point, hypotenuse: hypotenuse});
+        const indexToInsertAt = result.findIndex(temp => hypotenuse < temp.hypotenuse);
+        
+        if (indexToInsertAt === -1) { //can't find a place to insert in the middle of the result array, so you add it to the end
+          result.push({
+            point: point, 
+            hypotenuse: hypotenuse
+          });
+        } else { //insert in the middle
+          result.splice(indexToInsertAt, 0, {point: point, hypotenuse: hypotenuse});
         }
-        // remove last object from nearest, if length is > n
-        if (nearest.length > n) {
-          nearest.pop();
+  
+        // remove last object from result array, if length is > n
+        if (result.length > n) {
+          result.pop();
         }
       }
     }
-    return nearest.map(x => x.point);
+  
+    return result.map(x => x.point);
   }
