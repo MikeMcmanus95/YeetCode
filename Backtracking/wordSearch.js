@@ -28,32 +28,40 @@ Time: O(N*3^L)| Space: O(L)
 var exist = function(board, word) {
     const ROWS = board.length;
     const COLS = board[0].length;
-
+    
     function dfs(x, y, wordIndex) {
+        //if we're at the end of our search party
         if (word.length === wordIndex) return true;
-        if (x < 0 || y < 0 || x >= ROWS || y >= COLS || board[x][y] !== word[wordIndex]) return false;
-        
+
+        //check if we're within bounds
+        if (x < 0 || x >= ROWS || y < 0 || y >= COLS || board[x][y] !== word[wordIndex]) return false;
+    
+        const previousLetter = board[x][y];
+
+        //sink the ship
         board[x][y] = '#';
 
         if (
-            (dfs(x+1, y, wordIndex+1)) ||
-            (dfs(x-1, y, wordIndex+1)) ||
-            (dfs(x, y+1, wordIndex+1)) ||
-            (dfs(x, y-1, wordIndex+1)) 
+            dfs(x + 1, y, wordIndex + 1) ||
+            dfs(x - 1, y, wordIndex + 1) ||
+            dfs(x, y + 1, wordIndex + 1) ||
+            dfs(x, y - 1, wordIndex + 1)
             ) {
                 return true;
             }
 
-        board[x][y] = word[wordIndex];
+        //unsink the ship
+        board[x][y] = previousLetter;
+        //or board[x][y] = word[wordIndex]
     }
 
     for (let i = 0; i < ROWS; i++) {
         for (let j = 0; j < COLS; j++) {
-            if (board[i][j] === word[0] && dfs(i,j,0)) {
+            if (board[i][j] === word[0] && dfs(i, j, 0)) {
                 return true;
             }
         }
     }
-
+    
     return false;
 };
