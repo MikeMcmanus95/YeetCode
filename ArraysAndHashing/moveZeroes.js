@@ -15,8 +15,8 @@ Time: O(n) | Space: O(1)
 */
 
 function moveZeros(nums) {
-  let read = 0;
-  let write = 0;
+  let read = 0,
+      write = 0;
 
   while (read < nums.length) {
     if (nums[read]) {
