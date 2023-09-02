@@ -1,10 +1,42 @@
-/* Given a string, return true whether the string is a palindrome or not
-ex: isPaldindrome('xxyxx') // true
+/* 
+Leetcode 125
+https://leetcode.com/problems/valid-palindrome/description/
+
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+
+Given a string s, return true if it is a palindrome, or false otherwise.
+
+Example 1:
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+
+Example 2:
+Input: s = "race a car"
+Output: false
+Explanation: "raceacar" is not a palindrome.
 
 O(n) time
 O(1) space
 
 */
+
+var isPalindrome = function(s) {
+  s = s.regex(`[A-Za-z0-9]`,'')
+  
+  let left = 0,
+      right = s.length - 1;
+  
+  while (left < right) {
+      if (s[left] !== s[right]) {
+          return false;
+      }
+      left++;
+      right--;
+  }
+  
+  return true;
+};
 
 const isPalindrome = (string) => {
   let start = 0;
