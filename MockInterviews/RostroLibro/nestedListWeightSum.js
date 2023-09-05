@@ -42,3 +42,51 @@ const helper = function(nestedList, depth) {
 
     return sum;
 }
+
+//written as dfs
+var depthSum = function(nestedList) {
+    return dfs(nestedList, 1);
+    
+    function dfs(list, depth) {
+        let sum = 0;
+        
+        for (const element of list) {
+            if (element.isInteger()) {
+                const val = element.getInteger();
+                sum += (val * depth);
+            }
+            else {
+                const subList = element.getList();
+                sum += dfs(subList, depth + 1);
+            }
+        }
+        
+        return sum;
+    }
+};
+
+//written as BFS with level order
+var depthSum = function(nestedList) {
+    if (!nestedList.length) return 0;
+    
+    let queue = nestedList;
+    let depth = 1;
+    let sum = 0;
+    
+    while (queue.length) {
+        let nextGen = [];
+        
+        while (queue.length) {
+            let curr = queue.shift();
+            
+            if (curr.isInteger()) {
+                sum += curr.getInteger() * depth;
+            } else {
+                nextGen.push(...curr.getList());
+            }
+        }
+        depth++;
+        queue = nextGen;
+    }
+    return sum;
+};
