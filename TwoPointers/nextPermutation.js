@@ -66,13 +66,13 @@ var nextPermutation = function(nums) {
         let curr = nums[i],
             prev = nums[i + 1];
 
-        if (curr < prev) {
-            const nextLargestNumber = findNextLargestNumber(i);
-            swap(i, nextLargestNumber);
-            reverse(i + 1);
+        if (curr < prev) { //this is the first largest number
+            const nextLargestNumber = findNextLargestNumber(i); //here we want to find the next largest number
+            swap(i, nextLargestNumber); //so we can swap the two
+            reverse(i + 1); //then reverse all the numbers after i
             return;
         }
     }
 
-    nums.reverse();
+    nums.reverse(); //edge case if you can't find a number that's decreasing from the end, then you return the whole thing reversed
 };
