@@ -38,7 +38,23 @@ const calculatePower = function(base, exp) {
 }
 
 var myPow = function(base, exp) {
-    let result = calculatePower(base, Math.abs(exp));
+    let result = calc(base, Math.abs(exp));
 
     return exp >= 0 ? result : (1 / result);
 };
+
+//written succinctly with recursion
+var myPow = function(base, exp) {
+    let answer = calc(base, Math.abs(exp));
+
+    return exp >= 0 ? answer : (1 / answer);
+};
+
+const calc = function(base, exp) {
+    if (exp === 0) return 1;
+    if (exp % 2 === 0) { //whene exp is even
+        return calc(base * base, Math.floor(exp / 2));
+    } else { //when exponent is odd
+        return base * calc(base * base, Math.floor(exp / 2));
+    }
+}
