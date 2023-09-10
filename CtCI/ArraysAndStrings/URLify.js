@@ -6,3 +6,17 @@ Example:
 Input: "Mr John Smith    ", 13
 Output: "Mr%20John%20Smith%20"
 */
+
+const URLify = function(s, trueLength) {
+    let result = "";
+
+    for (let i = 0; i < trueLength; i++) {
+        if (s[i] === ' ') {
+            result += '%20';
+        } else {
+            result += s[i];
+        }
+    }
+
+    return result;
+}
