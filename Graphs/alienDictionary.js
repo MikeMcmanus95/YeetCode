@@ -46,16 +46,16 @@ var alienOrder = function(words) {
       }
     }
   
-    const visit = {}; // char: bool -> false = visited, true = current path, if does not exist then it hasn't been visited at all
+    const visited = {}; // char: bool -> false = visited, true = current path, if does not exist then it hasn't been visited at all
     let result = ''; // list of lexico sorted letters. to be joined as a string later
   
     const dfs = (char) => { // if dfs returns true then it's detected a loop because it means it's in the current path
-      if (char in visit) {
-        return visit[char]; // 
+      if (char in visited) {
+        return visited[char]; // 
       }
   
       //mark as visited --> true because it's in the current path
-      visit[char] = true;
+      visited[char] = true;
   
       for (const nei of adj[char]) { // check every char that is a neighbor of char
         if (dfs(nei)) { // run dfs on neighbor. if it returns true...
@@ -64,7 +64,7 @@ var alienOrder = function(words) {
       }
   
       //unmark visit --> false because it means it's been visited but we're no longer in current path
-      visit[char] = false;
+      visited[char] = false;
       result = char + result; // add char to front of result string
     }
   

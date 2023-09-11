@@ -29,6 +29,30 @@ Output: 1
 // O(N)O(N)O(N) in the worst case of the skewed tree,
 // and O(log⁡N)O(\log N)O(logN) in the average case of the balanced tree.
 // function kSmallest(root, k) {
+
+//iterative inorder traversal where count = 1
+var kthSmallest = function(root, k) {
+    const stack = [];
+    let curr = root;
+    let count = 1;
+
+    while (stack.length || curr) {
+        while (curr) {
+            stack.push(curr);
+            curr = curr.left;
+        }
+
+        curr = stack.pop();
+
+        if (count === k) return curr.val;
+        else count++;
+
+        curr = curr.right;
+    }
+};
+
+//iterative inorder traversal where count = 0
+var kthSmallest = function(root, k) {
     let stack = [];
     let curr = root;
     let n = 0;
@@ -38,11 +62,49 @@ Output: 1
             stack.push(curr);
             curr = curr.left;
         }
-
         curr = stack.pop();
         n++;
 
-        if (n === k) return curr.val;
+        if (k === n) return curr.val;
         curr = curr.right;
     }
-}
+};
+
+//recursive inorder traversal and count = 1
+var kthSmallest = function(root, k) {
+    let val;
+    let count = 1;
+
+    function inorderTraversal(root) {
+        if (!root) return;
+
+        inorderTraversal(root.left);
+        if (count === k) val = root.val;
+        count++;
+        inorderTraversal(root.right);
+    }
+
+    inorderTraversal(root);
+
+    return val;
+
+};
+
+//recursive inorder traversal and count = 0
+var kthSmallest = function(root, k) {
+    let result;
+    let count = 0;
+
+    function inorderTraversal(root) {
+        if (!root) return;
+
+        inorderTraversal(root.left);
+        if (count++ < k) result = root.val;
+        inorderTraversal(root.right);
+    }
+
+    inorderTraversal(root);
+
+    return result;
+
+};

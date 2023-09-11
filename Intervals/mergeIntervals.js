@@ -9,19 +9,23 @@ Example 1:
 Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
 Output: [[1,6],[8,10],[15,18]]
 Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+
+Time: O(n log n) | Space: O(log N)
 */
 
 var merge = function(intervals) {
     intervals.sort((a, b) => a[0] - b[0]);
-    let last = [null, -1];
+
+    let prev = [null, -1];
+
     const result = [];
 
     for (const [currStart, currEnd] of intervals) {
-        if (currStart > last[1]) {
-            last = [currStart, currEnd];
-            result.push(last);
+        if (currStart > prev[1]) {
+            prev = [currStart, currEnd];
+            result.push(prev);
         } else {
-            last[1] = Math.max(last[1], currEnd);
+            prev[1] = Math.max(prev[1], currEnd);
         }
     }
 

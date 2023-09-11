@@ -1,5 +1,7 @@
 /*
-  Leetcode URL: https://leetcode.com/problems/longest-palindromic-substring/
+  Leetcode 5
+  https://leetcode.com/problems/longest-palindromic-substring/
+  
   Write a function that, given a string, returns its longest palindromic
   substring.
 
@@ -11,6 +13,29 @@
   O(n^2) Time
   O(1) Space
 */
+
+var longestPalindrome = function(s) {
+  function expand(left, right) {
+      while (left >= 0 && s[left] === s[right]) { //this checks if we're within bounds
+          if (maxString.length < right - left + 1) { //if we pass the previous check then we can 
+            //update our maxString because we've found a new and longer palindrome than the previous one
+              maxString = s.slice(left, right + 1);
+          }
+          //expand outwards
+          left--;
+          right++;
+      }
+  }
+  
+  let maxString = "";
+  
+  for (let i = 0; i < s.length; i++) {
+      expand(i, i);
+      expand(i, i + 1); //this is an edge case of even palindromes
+  }
+  
+  return maxString;
+};
 
 function longestPalindromicSubstring(string) {
   if (string.length === 1) return string;

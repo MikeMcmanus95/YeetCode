@@ -46,6 +46,8 @@ Output: "cd"
 Explanation:
 1. Remove 3 'b': "aaabbbacd" => "aaaacd"
 2. Remove 4 'a': "aaaacd" => "cd"
+
+Time: O(n^2)? Space: O(n) because of recursion using call stack
 */
 
 function candyCrush(s, i = 0) {

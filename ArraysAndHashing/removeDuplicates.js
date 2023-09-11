@@ -1,4 +1,4 @@
-// Remove Duplicates (Google Interview Question)
+// plicates (Google Interview Question)
 // Time: O(n) | Space: O(2n) worst case if no dupes
 
 function removeDuplicates(arr, opt_rv, opt_hashFn) {

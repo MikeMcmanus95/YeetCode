@@ -21,11 +21,11 @@ var threeSum = function(nums) {
     nums.sort((a, b) => a - b);
     const result = [];
 
-    for (let i = 0; i < nums.length; i++) {
+    for (let i = 0; i < nums.length - 2; i++) { //slight optimization because we're lookng for triplets
+        if (nums[i] === nums[i - 1]) continue; //checks for duplicates and makes sure your i isn't a duplicate of the one before it
+
         let left = i + 1;
         let right = nums.length - 1;
-
-        if (nums[i] === nums[i - 1]) continue; //checks for duplicates and makes sure your i isn't a duplicate of the one before it
 
         while (left < right) {
             let sum = nums[i] + nums[left] + nums[right];
