@@ -25,26 +25,26 @@ Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
 
 //need to use new Map() because we can store an object as a key this way, can't do it with const map = {};
 var copyRandomList = function(head) {
-    const map = new Map(); //oldNode: newNode which is the copy
-    map.set(null, null);
+    const map = new Map(); //oldnode:newNode
+    map.set(null, null); // Set the end value of the LL
 
     let curr = head;
 
     while (curr) {
-        let newNode = new Node(curr.val);
-        map.set(curr, newNode);
-        curr = curr.next;
+      let newNode = new Node(curr.val); // Create a new node using .val property
+      map.set(curr, newNode);
+      curr = curr.next; // Bump of curr
     }
 
-    curr = head;
+    curr = head; // Reset curr to the head
 
-    while (curr) {
-        let copy = map.get(curr);
-        copy.next = map.get(curr.next);
-        copy.random = map.get(curr.random);
-        
-        curr = curr.next;
+    while (curr) { // Get all the pointers in copy pointing to where they need to point
+      let copy = map.get(curr);
+
+      copy.next = map.get(curr.next);
+      copy.random = map.get(curr.random);
+      curr = curr.next;
     }
-
-    return map.get(head); //gets the head of the copy
+    
+    return map.get(head);
 };
