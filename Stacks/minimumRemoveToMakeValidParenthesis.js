@@ -29,26 +29,29 @@ Explanation: An empty string is also valid.
 */
 
 var minRemoveToMakeValid = function(s) {
-    const stack = []; //stores index
-    const toRemove = new Set(); //stores index
+    const OPEN = '(';
+    const CLOSE = ')';
+    const stack = []; //stores only indices for OPEN brackets
+    const toRemove = new Set(); //stores the left over indices from stack because of the excellent look up time
 
     for (let i = 0; i < s.length; i++) {
       let char = s[i];
 
-      if (char === '(') {
+      if (char === OPEN) {
         stack.push(i);
-      } else if (char === ')') {
-        if (stack.length > 0) { //ensures there's a pair
+      } else if (char === CLOSE) {
+        if (stack.length) { //we've found a pair, let's pop it off
           stack.pop();
-        } else { //any extras gets put into the set
+        } else { //any extras/non pairs gets put into the set
           toRemove.add(i);
         }
       }
     }
 
-    //combine stack indices to the toRemove set
+    //combine stack indices to the toRemove set to use as a look up later
     stack.forEach((element) => toRemove.add(element));
 
+    //modify s string in array format
     const sArray = [...s];
 
     for (let i = 0; i < sArray.length; i++) {
