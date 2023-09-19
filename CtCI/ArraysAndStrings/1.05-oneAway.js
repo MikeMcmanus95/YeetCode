@@ -29,10 +29,10 @@ function oneEditAway(first, second) {
           return false;
         }
   
-        if (firstLength > secondLength) {
-          i--; //decrease i, we are deleting char from first string
-        } else if (firstLength < secondLength) {
-          j--; //decrease j, we are deleting char from second string
+        if (firstLength < secondLength) {
+            j--; //decrease j, we are deleting char from second string
+        } else if (firstLength > secondLength) {
+            i--; //decrease i, we are deleting char from first string
         }
       }
   
