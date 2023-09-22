@@ -34,11 +34,11 @@ var shiftingLetters = function(s, shifts) {
     let result = "";
     
     for (let i = 0; i < size; i++) {
-        const currPosition = s.charCodeAt(i) - 97;
+        const currPosition = s.charCodeAt(i) - 97; //0-26 so b would be position 1
         const shift = shifts[i];
         
-        const newPosition = (currPosition + shift) % 26;
-        const newChar = String.fromCharCode(newPosition + 97);
+        const newPosition = (currPosition + shift) % 26; //to get the remainder
+        const newChar = String.fromCharCode(newPosition + 97); //make it ascii again
     
         result += newChar;
     }
