@@ -20,41 +20,51 @@ output: -1
 */
 
 //BFS Approach
-function shortestWordEditPath(beginWord, endWord, wordList) {
-    const dict = {};
-    wordList.push(beginWord)
-    for (let word of wordList) {
-        for (let i = 0; i < word.length; i++) {
-            let pattern = word.substring(0, i) + '*' + word.substring(i + 1, word.length)
-            if (!dict[pattern]) dict[pattern] = new Set()
-            dict[pattern].add(word)
+function shortestWordEditPath(source, target, words) {
+    const dict = {}; //pattern:[words]; ex. '*t':[but, put]
+    words.push(source);
+    
+    for (let word of words) {
+      for (let i = 0; i < word.length; i++) {
+        let pattern = word.substring(0, i) + '*' + word.substring(i + 1, word.length);
+        
+        if (!dict[pattern]) {
+          dict[pattern] = new Set();
         }
+        
+        dict[pattern].add(word);
+      }
     }
-
+    
     let step = 0;
-    let q = [beginWord];
-    while (q.length) {
-        let next = [];
-        for (let w of q) {
-            if (w === endWord) return step;
-            for (let i = 0; i < w.length; i++) {
-                /// search all the patterns
-                const pattern = w.substring(0, i) + '*' + w.substring(i + 1, w.length)
-                if (dict[pattern]) {
-                    for (const nei of dict[pattern]) {
-                        next.push(nei)
-                    }
-                    delete dict[pattern]
-
-                }
-            }
+    let queue = [source];
+    
+    while (queue.length) {
+      const nextGen = [];
+      
+      for (const currWord of queue) {
+        if (currWord === target) {
+          return step;
         }
-        q = next;
-        step++;
+        
+        for (let i = 0; i < currWord.length; i++) {
+          const pattern = currWord.substring(0, i) + '*' + currWord.substring(i + 1, currWord.length);
+          
+          if (dict[pattern]) {
+            for (const nei of dict[pattern]) {
+              nextGen.push(nei);
+            }
+            delete dict[pattern];
+          }
+        }
+      }
+      
+      queue = nextGen;
+      step++;
     }
-
+    
     return -1;
-}
+  }
 
 //Niave Approach
 function shortestWordEditPath(source, target, words, steps=0) {

@@ -38,11 +38,13 @@ var letterCombinations = function(digits) {
     const result = [];
     
     function permute(string, index) {
+        //base case when we reach the end
         if (index === digits.length) {
             result.push(string);
             return;
         }
         
+        //check all the neighbors
         for (const char of MAP[digits[index]]) {
             permute(string + char, index + 1);
         }
