@@ -21,8 +21,7 @@ output: -1
 
 //BFS Approach
 function shortestWordEditPath(source, target, words) {
-    const dict = {}; //pattern:[words]; ex. '*t':[but, put]
-    words.push(source);
+    const dict = {}; //pattern:[words]; ex. '*ut':[but, put]
     
     for (let word of words) {
       for (let i = 0; i < word.length; i++) {
