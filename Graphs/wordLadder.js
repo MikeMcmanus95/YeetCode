@@ -1,5 +1,5 @@
 /*
-Leetcode 127
+Leetcode 127 Word Ladder
 https://leetcode.com/problems/word-ladder/
 
 A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words beginWord -> s1 -> s2 -> ... -> sk such that:
@@ -22,8 +22,6 @@ Explanation: The endWord "cog" is not in wordList, therefore there is no valid t
 */
 
 var ladderLength = function(beginWord, endWord, wordList) {
-    wordList.push(beginWord);
-    
     const dict = {};
     
     for (const word of wordList) {
