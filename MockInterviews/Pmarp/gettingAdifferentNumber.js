@@ -16,6 +16,7 @@ input:  arr = [0, 1, 2, 3]
 output: 4 
 */
 
+//Time: O(n) | Space: O(n) uses a set to keep track
 function getDifferentNumber(arr) {
     const set = new Set();
     
@@ -31,3 +32,22 @@ function getDifferentNumber(arr) {
     
     return arr.length;
   }
+
+  //Time: O(n) | Space: O(1), if you're allowed to modify the input array then you can swap
+  function getDifferentNumber(arr) {
+    let i = 0;
+  
+    while (i < arr.length) {
+        if (arr[i] > 0 && arr[i] <= arr.length && arr[arr[i]] !== arr[i]) {//what you're looking at is > 0 AND <= length AND it's not in the correct place
+            [arr[arr[i]], arr[i]] = [arr[i], arr[arr[i]]];
+        } else {
+            i++;
+        }
+    }
+  
+    for (i = 0; i < arr.length; i++) {
+        if (arr[i] !== i) return i;
+    }
+
+    return i;
+}
