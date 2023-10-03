@@ -53,7 +53,7 @@ function validParens(s) {
     for (const char of s) {
       let val = BRACKETS[char]; // undefined
   
-      if (val) { //looking at closed
+      if (val) { //looking at closed 
         // so i should pop the stack and verify it matches
         if (stack.pop() !== val) {
           return false;
