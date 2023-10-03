@@ -1,4 +1,7 @@
 /*
+Leetcode 271 Encode and Decode Strings
+https://leetcode.com/problems/encode-and-decode-strings/
+
 Design an algorithm to encode a list of strings to a string. The encoded string is then sent over the network and is decoded back to the original list of strings.
 
 Machine 1 (sender) has the function:
@@ -42,25 +45,44 @@ Input: dummy_input = [""]
 Output: [""]
 */
 
-function encode(strs) {
-    let result = "";
-    for (const word in strs) {
-        let size = word.length;
-        result += size.toString + "#" + word;
+const CHUNK_SIZE = 4;
+
+var encode = function(strs) {
+    let encodedString = "";
+    
+    for (const s of strs) {
+        let numString = encodedString.concat(String(s.length).padStart(CHUNK_SIZE, 0));
+        encodedString = numString.concat(s);
     }
+    
+    return encodedString;
+};
 
-    return result;
-}
 
-function decode(s) {
+var decode = function(s) {
+    if (s === "") return [""];
+    
     const result = [];
-    let i = 0;
-
-    while (i < s.length) {
-        let j = i;
-        while (s[j] !== "#") {
-            j += 1;
+    
+    let decodedString = "";
+    
+    let numP = 0;
+    let charP = numP + CHUNK_SIZE;
+    
+    while (numP < s.length) {
+        let currWordSize = Number(s.substring(numP, numP + CHUNK_SIZE));
+        if (currWordSize > 0) {
+            for (let i = charP; i < currWordSize + charP; i++) { //get the word
+                decodedString += s[i];
+            }
         }
-        let length = 
+        
+        result.push(decodedString); //push the word into result
+        
+        decodedString = ""; //reset string
+        numP = numP + currWordSize + CHUNK_SIZE; //move numP to the next number
+        charP = numP + CHUNK_SIZE; //move charP
     }
-}
+    
+    return result;
+};
