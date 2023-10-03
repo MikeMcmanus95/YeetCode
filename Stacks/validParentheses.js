@@ -26,10 +26,10 @@ function isValid(s) {
     }
 
     const stack = [];
-    for (const char of s) {
+    for (const char of s) { 
         const val = BRACKETS[char];
 
-        if (val) {
+        if (val) { //looking at closed and the stack holds closed ones
             stack.push(val);
         } else if (stack.pop() !== char) {
             return false;
@@ -38,3 +38,31 @@ function isValid(s) {
 
     return !stack.length;
 };
+
+//Alternative way to approach this is with the BRACKETS flipped, so BRACKETS is when I'm
+//looking at closed and stack is holding the open ones
+function validParens(s) {
+    const BRACKETS = {
+      ")" : "(",
+      "}" : "{",
+      "]" : "["
+    }
+  
+    const stack = [];
+  
+    for (const char of s) {
+      let val = BRACKETS[char]; // undefined
+  
+      if (val) { //looking at closed
+        // so i should pop the stack and verify it matches
+        if (stack.pop() !== val) {
+          return false;
+        }
+      } else {
+        // looking at open, so push on to the stack
+        stack.push(char);
+      }
+    }
+  
+    return !stack.length;
+  }
