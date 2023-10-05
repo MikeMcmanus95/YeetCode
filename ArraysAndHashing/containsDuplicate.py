@@ -36,6 +36,7 @@ class Solution:
 
         return False
 
+
 # Time O(n^2) | Space O(1)
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
@@ -45,3 +46,4 @@ class Solution:
                     return True
 
         return False
+        
