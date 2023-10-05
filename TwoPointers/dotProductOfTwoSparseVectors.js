@@ -34,7 +34,7 @@ Output: 6
 // let ans = v1.dotProduct(v2);
 
 
-
+// Use create tuples and use two pointers
 // Constructor Time: O(n) | Space: O(n)
 // DotProduct Time: O(n + m) Space: O(n + m)? | Space looks like O(1)
 class SparseVector {
