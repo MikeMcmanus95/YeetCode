@@ -29,6 +29,50 @@ Output: 3
 Time: O(M*N) | Space: O(M*N)
 */
 
+//Use a visited Set to store 'x,y' to mark them as visited, this way we don't mutate the original input
+function numIslands(grid) {
+    const DIR = [ [0,1],[1,0],[0,-1], [-1,0] ];
+    const visited = new Set();
+  
+    let count = 0;
+  
+    for(let row = 0; row < grid.length; row++) {
+        for(let col = 0; col < grid[row].length; col++) {
+            if(grid[row][col] === '1' && !visited.has(`${row},${col}`)){
+                explore(row,col);
+                count++;
+            } 
+        }
+    }
+    
+    return count;
+    
+    function explore(row,col) {
+        visited.add(`${row},${col}`);
+
+        for(let [x,y] of DIR){
+            x = x + row;
+            y = y + col;
+            if(isValid(x,y)) {
+                explore(x,y);   
+            }
+        }
+    }
+
+    function isValid(row,col) {
+        if (row>=0 &&
+            col>=0 &&
+            row<grid.length &&
+            col<grid[row].length&&
+            grid[row][col] ==='1' &&
+            !visited.has(`${row},${col}`)) {
+                return true;
+            }
+        return false;
+    }
+}
+
+//Sinking the Islands
 const LAND = "1";
 const WATER = "0";
 
