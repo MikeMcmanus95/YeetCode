@@ -12,8 +12,42 @@ Solution 1: Create a hashMap where the number/value is on the left and the frequ
 Convert the hashset to an array called bucket where the index is the frequency and the container holds an array of the numbers.
 Look at the bucket starting from the end and put in into a result array while the length is not greater than k
 
-Time: O(n) || Space: O(n)
+
  */
+// Total time : O(n + mlog(k) + k) | Space : O(m)
+// this is better than O(mlog(m)) because we dequeue whenever the size of heap is greater than k
+
+var topKFrequent = function(nums, k) {
+    const map = new Map();
+    const heap = new MinPriorityQueue();
+    
+    // hashmap, O(n)
+    for (const num of nums) {
+        map.set(num, (map.get(num) || 0) + 1);
+    }
+    
+    // heapify using MaxPriorityQueue, we enqueue key based on count, O(mlog(m)) where m is length of hashmap
+    for (const [val, freq] of map) {
+        heap.enqueue(val, freq);
+        
+        while (heap.size() > k) {
+            heap.dequeue()
+;        }
+    }
+    
+       
+    const result = [];
+    
+    // dequeue k times from very top O(k)
+    for (let i = 0; i < k; i++) {
+        result.push(heap.dequeue().element);
+    }
+    
+    return result;
+};
+
+
+// Time: O(n) | Space: O(n)
 function topKFrequent(nums, k) {
     const freqMap = new Map();
   
