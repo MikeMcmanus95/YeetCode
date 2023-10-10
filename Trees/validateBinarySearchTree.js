@@ -47,6 +47,27 @@ isValidBST(root: 20, min = -Infinity, max = Infinity)
       isValidBST(root: 9, min = 10, max = 18): false, though 9 < 18 < 19, 9 is lower than the min=10, so it will return false.
 */
 
+//depth first traversal
+function isValidBST(root) {
+  let last = undefined;
+  let isValid = true;
+  function traverse(node) {
+    if (!node) return;
+    
+    traverse(node.left);
+    // look at node:
+    if (last !== undefined && node.val <= last) {
+      // uh oh! not in order!
+      isValid = false;
+    } else {
+      last = node.val;
+    }
+    traverse(node.right);
+  }
+  traverse(root);
+  return isValid;
+}
+
 //Recursive
 var isValidBST = function(root, min = -Infinity, max = Infinity) {
   if(!root) return true;

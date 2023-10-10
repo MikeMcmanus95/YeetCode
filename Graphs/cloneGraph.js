@@ -16,6 +16,34 @@ Time: O(E + V) | Space: O(V)
 Space is occupied by the heigh of the graph O(H) and the recursion stack
 */
 
+//written with new Map()
+function Node(val) {
+  return {val: val, neighbors: []};
+}
+
+function cloneGraph(root) {
+  const oldToNew = new Map(); //old:new
+
+  function clone(node) {
+    if (!node) return;
+
+    if (oldToNew.has(node.val)) {
+      return oldToNew.get(node.val);
+    }
+    let copy = new Node(node.val);
+    oldToNew.set(node.val, copy);
+
+    for (const neighbor of node.neighbors) {
+      copy.neighbors.push(clone(neighbor));
+    }
+
+    return copy;
+  }
+
+  return clone(root);
+}
+
+//written with JS {}
 var cloneGraph = function(node) {
     const oldToNew = {};
 
@@ -37,3 +65,4 @@ var cloneGraph = function(node) {
     
     return clone(node);
 };
+
