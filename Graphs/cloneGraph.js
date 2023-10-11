@@ -21,27 +21,33 @@ function Node(val) {
   return {val: val, neighbors: []};
 }
 
-function cloneGraph(root) {
-  const oldToNew = new Map(); //old:new
-
-  function clone(node) {
-    if (!node) return;
-
-    if (oldToNew.has(node.val)) {
-      return oldToNew.get(node.val);
-    }
-    let copy = new Node(node.val);
-    oldToNew.set(node.val, copy);
-
-    for (const neighbor of node.neighbors) {
-      copy.neighbors.push(clone(neighbor));
-    }
-
-    return copy;
+var cloneGraph = function(node) { //these nodes are distinct values
+  const oldToNew = new Map();
+  
+  function clone(curr) {
+      //if you've reached the end, return
+      if (!curr) return;
+      
+      //if you've already seen this node before, return the copy of what you're looking at
+      if (oldToNew.has(curr.val)) {
+          return oldToNew.get(curr.val);
+      }
+      
+      //make a copy and mark it as visited in your map
+      let copy = new Node(curr.val);
+      oldToNew.set(curr.val, copy);
+      
+      //copy all the neighbors of curr onto copy's node
+      for (const neighbor of curr.neighbors) {
+          copy.neighbors.push(clone(neighbor));
+      }
+      
+      //return the copy
+      return copy;
   }
-
-  return clone(root);
-}
+  
+  return clone(node);
+};
 
 //written with JS {}
 var cloneGraph = function(node) {

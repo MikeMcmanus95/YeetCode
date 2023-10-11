@@ -35,14 +35,58 @@ Output: [[2,2,2,2],[2,3,3],[3,5]]
    [2,2,2,2] [2,2,2] [2,2,3] [2,2]     
    
    Because we can use the same number in the candidates array to add to the target (2x2x2x2 = 8) and we want to make
-   sure that our result has unique numbers and not permutations, we haveto make sure that every time we make a decision,
+   sure that our result has unique numbers and not permutations, we have to make sure that every time we make a decision,
    we're deciding not to add anymore of iteself. For example, starting at the node, we decide to add 2 and the other one is an empty array (base case).
    then from the 2 we decide to add 2 to itself and also we don't want to add anymore 2's so we want to add numbers from the candidates array.
 
    N is the number of candidates, T is the target value, M is the minimal value among the candidates
    Time: O(N^(T/M)+1)| Space: O(T/M)
+
+Example to explain time complexity:
+candidates = [3,4,5]
+If target T = 9, we have 10 possible combinations:
+[]
+[3], [3,3], [3,3,3], [3,4,4], [3,5]
+[4], [4,4]
+[5], [5,5]
+
+10^(9/3) = 30
 */
 
+//alternative way to write it using backtracking
+var combinationSum = function(candidates, target) {
+    const result = [];
+    
+    function explore(temp, idx) {
+        let tempSum = getSum(temp);
+        
+        if (tempSum(temp) > target) return;
+        
+        if (tempSum(temp) === target) {
+            result.push([...temp]);
+            return;
+        }
+        
+        for (let i = idx; i < candidates.length; i++) {
+            let el = candidates[i];
+            temp.push(el);
+            explore(temp, i);
+            temp.pop();
+        }
+    }
+    
+    explore([], 0);
+    
+    return result;
+};
+
+const getSum = (arr) => {
+    return arr.reduce((acc, curr) => acc + curr, 0);
+}
+
+
+
+//alternative way to write it using backtracking
 var combinationSum = function(candidates, target) {
     const result = [];
     const tempArr = [];
