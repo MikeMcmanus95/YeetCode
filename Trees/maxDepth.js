@@ -44,6 +44,38 @@ public int maximum_depth(TreeNode root) {
 }
 */
 
+//Alternative way to write this using min and max
+var isValidBST = function(root) {
+  return explore(root, -Infinity, Infinity);
+};
+
+function explore(node, min, max){
+  if (!node) return true;
+  if (node.val <= min || node.val >= max) return false;
+  
+  return explore(node.left, min, node.val) && explore(node.right, node.val, max);
+}
+
+
+//Alternative way to write this, using similar DFS template
+var maxDepth = function(root) {
+  let maxDepth = 0;
+  
+  function explore(curr, tempDepth) {
+      if (!curr) return;
+      
+      tempDepth++;
+      maxDepth  = Math.max(maxDepth, tempDepth);
+      
+      explore(curr.left, tempDepth);
+      explore(curr.right, tempDepth);
+  }
+  
+  explore(root, 0);
+  
+  return maxDepth;
+};
+
 //Top Down - Upon going deep we increment our depth and pass it deeper. 
 //When we reach a leaf, we return our accumulated depth.
 function maxDepth(root) {

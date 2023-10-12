@@ -49,22 +49,28 @@ isValidBST(root: 20, min = -Infinity, max = Infinity)
 
 //depth first traversal
 function isValidBST(root) {
-  let last = undefined;
   let isValid = true;
-  function traverse(node) {
-    if (!node) return;
-    
-    traverse(node.left);
-    // look at node:
-    if (last !== undefined && node.val <= last) {
-      // uh oh! not in order!
-      isValid = false;
-    } else {
-      last = node.val;
-    }
-    traverse(node.right);
+  let prev = undefined;
+  
+  function traverse(curr) { //in order traversal
+      if (!curr) return;
+      
+      //go to the left first
+      traverse(curr.left);
+      
+      //process current node
+      if (prev !== undefined && curr.val <= prev) { //uh oh! not in order!
+          isValid = false;
+      } else {
+          prev = curr.val; //update prev
+      }
+      
+      //go to the right
+      traverse(curr.right);
   }
+  
   traverse(root);
+  
   return isValid;
 }
 
