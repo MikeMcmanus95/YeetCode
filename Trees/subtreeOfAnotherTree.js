@@ -22,16 +22,14 @@ Output: true
 
 //DFS Solution
 //Time: O(MN) | Space: O(M+N)
-function isSubTree(root, subRoot) {
+var isSubtree = function(root, subRoot) {
     if (!root) return false;
     if (isIdentical(root, subRoot)) return true;
-    return isSubTree(root.left, subRoot) || isSubTree(root.right, subRoot);
-}
+    return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+};
 
-function isIdentical(root, subRoot) {
-    if (!root && !subRoot) return true;
-
-    if (!root || !subRoot || root.val !== subRoot.val) return false;
-
-    return isIdentical(root.left, subRoot.left) && isIdentical(root.right, subRoot.right);
+function isIdentical(p, q) {
+    if (!p && !q) return true;
+    if (!p || !q || p.val !== q.val) return false;
+    return isIdentical(p.left, q.left) && isIdentical(p.right, q.right);
 }
