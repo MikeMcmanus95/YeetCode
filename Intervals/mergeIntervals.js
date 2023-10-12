@@ -14,17 +14,17 @@ Time: O(n log n) | Space: O(log N)
 */
 
 var merge = function(intervals) {
-    intervals.sort((a, b) => a[0] - b[0]);
+    const intervalsCopy = [...intervals].sort((a, b) => a[0] - b[0]);
 
     let prev = [null, -1];
 
     const result = [];
 
     for (const [currStart, currEnd] of intervals) {
-        if (currStart > prev[1]) {
+        if (currStart > prev[1]) { //not a merge, just update prev and push into result
             prev = [currStart, currEnd];
             result.push(prev);
-        } else {
+        } else { //merge case just update prev[1]
             prev[1] = Math.max(prev[1], currEnd);
         }
     }
