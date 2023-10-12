@@ -15,23 +15,27 @@ Time: O(n) | Space: O(h)
 */
 
 //DFS Solution
-function invertTree(root) {
-  if (!root) return root;
-
-  invertTree(root.left);
-  invertTree(root.right);
-
-  swap(root);
-
+var invertTree = function(root) {
+  function explore(node) {
+      if (!node) return;
+      
+      explore(node.left);
+      explore(node.right);
+      
+      swap(node);
+  }
+  explore(root);
+  
   return root;
-}
+};
 
 function swap(root) {
   let temp = root.left;
-
   root.left = root.right;
   root.right = temp;
 }
+
+
 
 //JS ES6 syntax
 var invertTree = function(root) {
