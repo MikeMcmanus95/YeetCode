@@ -22,6 +22,35 @@ function isSameTree(p, q) {
   }
 
 
+function isSameTree(rootA, rootB) {
+
+  function dft(nodeA, nodeB) {
+    //base cases    
+    if (!nodeA && !nodeB) {
+      return true;
+    }
+  
+    if (!nodeA && nodeB ||
+       nodeA && !nodeB) {
+        return false;
+     }
+
+    if (nodeA.val !== nodeB.val) {
+      return false;
+    }
+    
+    //when to keep looking
+    return dft(nodeA.left, nodeB.left) && dft(nodeA.right, nodeB.right);
+  }
+
+  return dft(rootA, rootB);
+}
+
+  if (!p && !q) return true;
+  if (!p || !q || p.val !== q.val) return false;
+  
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+
 
 //Iterative Solution
 //Time: O(n) | Space: O(n) is worst case in unbalanced tree
