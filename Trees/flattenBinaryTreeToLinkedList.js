@@ -14,6 +14,32 @@ Output: [1,null,2,null,3,null,4,null,5,null,6]
 
 */
 
+//in order DFS traversal
+function flatten(root) {
+    let prev = null;
+  
+    function explore(curr) {
+      if (!curr) return;
+  
+      let rightNode = curr.right;
+      let leftNode = curr.left;
+  
+      if (!prev) {
+        prev = curr;
+      } else {
+        prev.left = null;
+        prev.right = curr;
+        prev = prev.right;
+      }
+  
+      explore(leftNode);
+      explore(rightNode);
+    }
+    explore(root);  
+  
+    return root;
+  }
+
 //O(1) space
 //if curr has a left child, create a runner and run it all the way to the bottom right most
 //rewire by taking runner.right = curr.right, sever the tie by doing curr.right = curr.left and update curr.left
@@ -43,24 +69,18 @@ var flatten = function(root) {
 // set left child to null & set right child to the previous node
 var flatten = function(root) {
     let prev = null;
-
-    const traverse = node => {
-        if (!node) {
-            return;
-        }
-        
-        //right
-        traverse(node.right);
-        
-        //left
-        traverse(node.left);
-        
-        //task on the node
-        node.left = null;
-        node.right = prev;
-        prev = node;
-        
-    } 
     
-    traverse(root);
+    function explore(curr) {
+        if (!curr) return;
+        
+        explore(curr.right);
+        explore(curr.left);
+        
+        curr.left = null;
+        curr.right = prev;
+        prev = curr;
+    }
+    
+    explore(root);
 };
+
