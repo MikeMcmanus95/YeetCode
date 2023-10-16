@@ -35,7 +35,7 @@ Output: 6
 // let ans = v1.dotProduct(v2);
 
 
-// Use create tuples and use two pointers
+// Create tuples and use two pointers
 // Constructor Time: O(n) | Space: O(n)
 // DotProduct Time: O(n + m) Space: O(n + m)? | Space looks like O(1)
 class SparseVector {
@@ -99,16 +99,18 @@ class SparseVector {
         return result;
     }
     
-    binarySearch(target, nums) {
-        let [left,right] = [0, nums.length - 1];
+    binarySearch(targetIdx, array) {
+        let [left,right] = [0, array.length - 1];
+        //let left = 0;
+        //let right = array.length - 1
         
         while (left <= right) {
             let mid = left + Math.floor((right-left) / 2);
-            let [currIndex, currNum] = nums[mid];
+            let [currIdx, currNum] = array[mid];
             
-            if (currIndex === target) {
+            if (currIdx === targetIdx) {
                 return currNum;
-            } else if (currIndex < target) {
+            } else if (currIdx < targetIdx) {
                 left = mid + 1;
             } else {
                 right = mid - 1;
