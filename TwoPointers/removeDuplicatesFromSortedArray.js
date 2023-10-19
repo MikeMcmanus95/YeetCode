@@ -49,3 +49,25 @@ var removeDuplicates = function(nums) {
     
     return curr + 1;
 };
+
+
+// made copy of input
+//Time: O(nlogn) because of sort if input is not sorted | Space: 0(n) to copy or O(1) on the copy
+function removeDupes(nums) {
+    let numsCopy = [...nums].sort((a, b) => a - b)
+    let curr = 0;
+      
+    for (let next = 1; next < numsCopy.length; next++) {
+        if (numsCopy[curr] !== numsCopy[next]) {
+          curr++;
+          numsCopy[curr] = numsCopy[next];
+        }
+    }
+  
+    for (let i = numsCopy.length; i > curr + 1; i--) {
+      numsCopy.pop();
+    }
+    
+    return numsCopy
+    
+  }

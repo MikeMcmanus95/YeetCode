@@ -21,7 +21,7 @@ Output: true
 */
 
 //DFS Solution
-//Time: O(MN) | Space: O(M+N)
+//Time: O(2^n) where n = number of nodes | Space: O(M*N) for the stack
 var isSubtree = function(root, subRoot) {
     if (!root) return false;
     if (isIdentical(root, subRoot)) return true;

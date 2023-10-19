@@ -23,7 +23,7 @@ Output: 4
 //Space: O(k)
 
 var findKthLargest = function(nums, k) {
-    let heap = new MinPriorityQueue();
+    const heap = new MinPriorityQueue();
     
     for (let num of nums) {
         heap.enqueue(num);

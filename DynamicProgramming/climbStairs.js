@@ -39,6 +39,51 @@ const climbStairs = function(num) {
 };
 
 
+//Recursion Solution Time: O(2^n)
+function climbStars(num) {
+  //base case
+  if (num === 1 || num === 2) return num;
+
+  //recursive case
+  return climbStairs(num - 1) + climbStairs(num - 2);
+}
+
+/*
+num 5
+
+cs(5) = 7
+
+time 2 ^ n
+
+Why is climbStairs() O(2^n)??
+ - Each function call calls two more of itself
+ - 1 iteration will call 2
+    2 will call 4
+    4 will call 8
+    each function call doubles itself
+
+
+climbStairs(1) -> 1
+climbStairs(2) -> 1
+climbStairs(3) -> foo(1) and foo(2)
+
+climbStairs(4) -> foo(3) and foo(2)
+climbStairs(5) -> foo(3) and foo(4)
+  foo(3).     foo(4)
+
+              foo(2) and  foo(3)
+                   foo(1) and foo(2)
+
+  foo(1) foo(2)
+...
+...
+
+
+
+
+*/
+
+
 // Solution 2 | 1D Array Dynamic Programming
 var climbStairs = function (n) {
   let dp = new Array(n + 1).fill(0);
@@ -91,3 +136,27 @@ var climbStairs = function(n) {
   }
   return arr[n-1]
 };
+
+
+/*
+Dynamic Programming - 
+ - "optimizatino of recursion"
+
+ - specifically, memoization!
+
+ - Memoization = storing previously computed solutions and using to compute future solutions efficiently
+   - Always uses an array or map
+   - Makes a exponential time complexity solution (e.g O(2^n, n!, n^4) to be polynomial (e.g O(n^2, n*m, etc.))
+
+
+ - When they see a "super hard question" they assume that it's a dynamic programming question. DONT FALL FOR THAT (yet). 
+
+ Approach Dynamic Programming Questions (whether or not you know it is)
+  - Find the recursive solution
+  - Memoize later
+
+
+
+- always code out the brute force solution first; then optimize
+
+*/
