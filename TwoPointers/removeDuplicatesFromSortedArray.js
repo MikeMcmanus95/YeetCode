@@ -37,6 +37,21 @@ Explanation: Your function should return k = 5, with the first five elements of 
 It does not matter what you leave beyond the returned k (hence they are underscores).
 */
 
+//rewritten to look back and without a possible off by 1 error with return write
+function uniqueNumbersLength(nums) {
+    let write = 1;
+  
+    for (let read = 1; read < nums.length; read++) {
+      if (nums[read] !== nums[read - 1]) {
+        nums[write] = nums[read];
+        write++;
+      }
+    }
+  
+    return write;
+  }
+
+
 var removeDuplicates = function(nums) {
     let curr = 0;
     

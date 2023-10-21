@@ -65,7 +65,7 @@ var myAtoi = function(str) {
     let i = 0;
     let result = 0;
     let sign = 1;
-    let s = `${str}`.trim();
+    let s = `${str}`.trim();//this get rid of leading 0's only
     
     if (s[i] === '-' || s[i] === '+') {
         sign = s[i] === '-' ? -1 : 1;
