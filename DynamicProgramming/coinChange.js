@@ -25,16 +25,14 @@ Output: 0
 
 var coinChange = function(coins, amount) {
     const MAX = Number.MAX_SAFE_INTEGER;
-    
     const dp = new Array(amount + 1).fill(MAX);
-    
     dp[0] = 0; // this is saying we don't need any coins to add up to the amount 0
     
-    for (let i = 1; i <= amount; i++) { //each index in dp starting at 1
-        for (const currCoin of coins) {
-            if (currCoin <= i) { // this in case the coins are not sorted in ascending order
-                const change = dp[i - currCoin] + 1;
-                dp[i] = Math.min(dp[i], change);
+    for (let a = 1; a < amount + 1; a++) { //each index in dp starting at 1, where a is the possible amount
+        for (const coin of coins) {
+            if (a - coin >= 0) { //if it's negative then it's not a possibility because we're subtracting
+                const change = dp[a - coin] + 1;
+                dp[a] = Math.min(dp[a], change);
             }
         }
     }
