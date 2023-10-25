@@ -30,8 +30,47 @@ var rob = function(nums) {
     for (let i = 2; i < nums.length; i++) {
         let currMoney = nums[i];
         
-        dp[i] = Math.max(dp[i - 1], nums[i], dp[i - 2] + currMoney);
+        dp[i] = Math.max(dp[i - 1], dp[i - 2] + currMoney);
     }
     
     return dp[nums.length - 1];
 };
+
+/*
+[5] --> 5
+
+[5,10] --> 10
+
+[1,5,3,5,6]
+[1,5,5,10,11]
+          i
+        a
+      b
+
+
+
+       5
+    1     3
+      6  5]
+
+
+arr = [1,2,3,4,5]
+arr1 = [1,2,3,4]
+arr2 = [2,3,4,5]
+
+house_robber_1(arr) -> solved :)
+
+house_robber_2(arr) -> max(house_robber_1(arr1), house_robber_2(arr2))
+
+
+House Robber 2: (same as regular house_robber except neighborhood is circular)
+
+ - if it's circular, that means that the endpoints are connected
+
+ - house robber 2, circular neighborhood is identical to house robber 1, where the solution is that we either
+    - look out all of the houses except the first
+    - look at all of the houses except for the last
+    return the max
+
+
+*/
