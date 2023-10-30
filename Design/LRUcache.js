@@ -41,69 +41,73 @@ Implementation: Use a doubly linked list, with an empty head and tail property, 
 */
 
 class Node {
-  constructor(key, val) {
-      this.key = key;
-      this.val = val;
-      this.prev = null;
-      this.next = null;
-  }
+    constructor(key = null, val = null) {
+        this.key = key;
+        this.val = val;
+        this.prev = null;
+        this.next = null;
+    }
 }
 
 class LRUCache {
-  constructor(capacity) {
-      this.cap = capacity;
-      this.map = new Map();
-      this.left = new Node(-1, -1);
-      this.right = new Node(-1, -1);
-      this.left.next = this.right;
-      this.right.prev = this.left;
-  }
-
-  insert(curr) {
-      let next = this.right;
-      let prev = this.right.prev;
-
-      curr.next = next;
-      curr.prev = prev;
-
-      prev.next = curr;
-      next.prev = curr;
-  }
-
-  remove(curr) {
-      let prev = curr.prev;
-      let next = curr.next;
-
-      prev.next = next;
-      next.prev = prev;
-  }
-
-  get(key) { //if the key exists, you need to update your cache so that it now becomes the most recently used
-      if (this.map.has(key)) {
-          this.remove(this.map.get(key));
-          this.insert(this.map.get(key));
-          return this.map.get(key).val;
-      }
-      return -1;
-  }
-
-  put(key, val) { //if the key exists, remove it and update val
-      if (this.map.has(key)) {
-          this.remove(this.map.get(key));
-      }
-
-      //add the key-value pair to the cache
-      let curr = new Node(key, val);
-      this.map.set(key, curr);
-      this.insert(curr);
-
-      //if the number of keys exceeds capacity, evict the LRU
-      if (this.map.size > this.cap) {
-          let LRU = this.left.next;
-          this.remove(LRU);
-          this.map.delete(LRU.key)
-      }
-  }
+    constructor(capacity) {
+        this.cap = capacity;
+        this.map = new Map();
+        this.least = new Node(-1, -1);
+        this.most = new Node(-1, -1);
+        this.least.next = this.most;
+        this.most.prev = this.least;
+    }
+    
+    //inserting on the right side by using next = this.most
+    insert(curr) {
+        let next = this.most;
+        let prev = this.most.prev;
+        
+        curr.next = next;
+        curr.prev = prev;
+        
+        prev.next = curr;
+        next.prev = curr;
+    }
+    
+    
+    //removing from the left
+    remove(curr) {
+        let prev = curr.prev;
+        let next = curr.next;
+        
+        prev.next = next;
+        next.prev = prev;
+    }
+    
+    //if we have the key already stored in the map, we want to remove and insert it so that it becomes the most recently used item as well
+    get(key) {
+        if (this.map.has(key)) {
+            this.remove(this.map.get(key));
+            this.insert(this.map.get(key));
+            return this.map.get(key).val;
+        }
+        return - 1;
+    }
+    
+    //if we already have the key, we want to remove it before we insert something
+    //we also check capacity here
+    put(key, val) { //return void
+        if (this.map.has(key)) {
+            this.remove(this.map.get(key))
+        }
+        
+        let curr = new Node(key, val);
+        this.map.set(key, curr);
+        this.insert(curr);
+        
+        if (this.map.size > this.cap) {
+            let itemToRemove = this.least.next;
+            this.remove(itemToRemove);
+            this.map.delete(itemToRemove.key);
+        }
+    }
 }
 
 // class LRUCache {

@@ -60,7 +60,7 @@ class SparseVector {
             let [indexJ, numJ] = vec.array[p2];
             
             if (indexI === indexJ) {
-                result += numI *numJ;
+                result += numI * numJ;
                 p1++;
                 p2++;
             } else if (indexI < indexJ) {
@@ -90,6 +90,7 @@ class SparseVector {
     
     
     dotProduct(vec) {
+        //consider transitive property
         let result = 0;
         
         for (const [index, num] of vec.array) {
