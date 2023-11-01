@@ -47,3 +47,50 @@ function getColumn(matrix, col) {
 
 console.log(checkSubSudoku([['1','2','3'],['2','3','1'],['3','1','2']]))
 console.log(checkSubSudoku([[1,2,3,4],[2,3,4,1],[3,4,1,2],[4,1,2,3]]))
+
+
+/**
+ * Each row must contain the digits 1-9 without repetition
+ * Each column must contain the digits 1-9 without repetition
+ * Each of the nine 3x3 sub-boxes must contain 1-9 without repetition.
+ * 
+ * board.length === 9
+ * board[i].length === 9
+ * board[i][j] is a digit '1'-'9' or '.'
+ */
+function isValidSudoku(board) {
+
+  for (let row = 0; row < 9; row++) {
+    let visitedByRow = new Set();
+    let visitedByCol = new Set();
+    for (let col = 0; col < 9; col++) {
+      let currNum = board[row][col];
+      if (currNum !== '.') {
+        if (visitedByRow.has(currNum)) return false;
+        visitedByRow.add(currNum);
+      }
+
+      let currNumCol = board[col][row];
+      if (currNumCol !== '.') {
+        if (visitedByCol.has(currNumCol)) return false;
+        visitedByCol.add(currNumCol);
+      }
+    }
+  }
+
+  for (let baseRow = 0; baseRow < board.length; baseRow += 3) {
+    for (let baseCol = 0; baseCol < board[0].length; baseCol += 3) {
+      let visited = new Set();
+      for (let x = 0; x < 3; x++) {
+        for (let y = 0; y < 3; y++) {
+          let el = board[baseRow + x][baseCol + y];
+          if (el === '.') continue;
+          if (visited.has(el)) return false;
+          visited.add(el);
+        }
+      }           
+    }
+  }
+
+  return true;
+}
