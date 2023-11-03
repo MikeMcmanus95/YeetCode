@@ -112,3 +112,37 @@ Concrete Example:
 
 */
 
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LockFreeLinkedList {
+    constructor() {
+        this.head = new Node(null);
+    }
+
+    insert(data) {
+        const new_node = new Node(data);
+        while (true) {
+            const current_head = this.head;
+            new_node.next = current_head;
+            if (compareAndSwap(this.head, current_head, new_node)) {
+                break;
+            }
+        }
+    }
+
+    delete(data) {
+        let current = this.head;
+        while (current.next !== null) {
+            if (current.next.data === data) {
+                current.next = current.next.next;
+                break;
+            }
+            current = current.next;
+        }
+    }
+}
