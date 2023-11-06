@@ -23,6 +23,26 @@ Input: coins = [1], amount = 0
 Output: 0
 */
 
+var coinChange = function(coins, amount) {
+    const MAX = Number.MAX_SAFE_INTEGER;
+    const dp = new Array(amount + 1).fill(MAX);
+    dp[0] = 0;
+    
+    
+    for (let amountIndex = 1; amountIndex < dp.length; amountIndex++) {
+        for (const coin of coins) {
+            if (amountIndex - coin >= 0) {
+                const possibleMinNumOfCoins = dp[amountIndex - coin] + 1;
+                dp[amountIndex] = Math.min(dp[amountIndex], possibleMinNumOfCoins);                
+            }
+        }
+    }
+    
+    if (dp[amount] === MAX) return -1;
+    return dp[amount];
+};
+
+
 /*
  - building up the solution from 0 to 350
  - coins consist of [1,5, 10, 25, 100]
@@ -111,38 +131,3 @@ Concrete Example:
 
 
 */
-
-class Node {
-    constructor(data) {
-        this.data = data;
-        this.next = null;
-    }
-}
-
-class LockFreeLinkedList {
-    constructor() {
-        this.head = new Node(null);
-    }
-
-    insert(data) {
-        const new_node = new Node(data);
-        while (true) {
-            const current_head = this.head;
-            new_node.next = current_head;
-            if (compareAndSwap(this.head, current_head, new_node)) {
-                break;
-            }
-        }
-    }
-
-    delete(data) {
-        let current = this.head;
-        while (current.next !== null) {
-            if (current.next.data === data) {
-                current.next = current.next.next;
-                break;
-            }
-            current = current.next;
-        }
-    }
-}

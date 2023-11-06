@@ -20,41 +20,44 @@ Output: false
 Explanation: There are a total of 2 courses to take. 
 To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
 
-Time:O(m+n) | Space: O(m+n)
+
 */
 
 
-//Topological Sort is good for non cyclic graphs where order of the path matters
-//for this example, you have to take a bunch of prereqs in order before taking Math 400 level classes
+// Topological Sort is good for non cyclic graphs where order of the path matters
+// for this example, you have to take a bunch of prereqs in order before taking Math 400 level classes
+// Time:O(m+n) | Space: O(m+n) m for edges and n elements for the indegree array
 
 var canFinish = function(numCourses, prerequisites) {
-    const result = []; //this is the order you take the classes in
-    const queue = [];
-    const graph = new Map();
+    const graph = new Map(); //prereq: [course1,course2]
     const indegree = new Array(numCourses).fill(0); //indegree for course you need to take
     
-    for (const [course, prereq] of prerequisites) {//prereq: [course1,course2]
+    for (const [course, prereq] of prerequisites) {
         if (!graph.has(prereq)) {
-            graph.set(prereq, [course]);
+            graph.set(prereq, [course])
         } else {
             graph.get(prereq).push(course);
         }
         indegree[course]++;
     }
     
+    const queue = [];
     for (let i = 0; i < numCourses; i++) {
         if (indegree[i] === 0) {
             queue.push(i);
         }
     }
     
+    const result = []; //this is the order you take the classes in
+    
     while (queue.length) {
-        const currCourse = queue.shift();
+        let currCourse = queue.shift();
+        
         if (graph.has(currCourse)) {
-            for (let child of graph.get(currCourse)) {
-                indegree[child]--;
-                if(indegree[child] === 0) {
-                    queue.push(child);
+            for (let nei of graph.get(currCourse)) {
+                indegree[nei]--;
+                if (indegree[nei] === 0) {
+                    queue.push(nei);
                 }
             }
         }
